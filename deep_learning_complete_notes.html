@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Learning & Machine Learning — Complete Study Portal</title>
+<style>
+:root{
+  --bg:#f5f6f8; --bg-card:#ffffff; --text:#1c2530; --text-soft:#525b66;
+  --border:#e1e5eb; --sidebar-bg:#12213b; --sidebar-text:#cfd8e6; --sidebar-active:#2f57a3;
+  --accent:#2f57a3; --accent-2:#0e8a6d; --formula-bg:#eef3ff; --formula-border:#9fb6e8;
+  --def-bg:#eefaf5; --def-border:#8fd6bd; --example-bg:#fff8e6; --example-border:#e8c766;
+  --mistake-bg:#fdecec; --mistake-border:#e79a9a; --tip-bg:#f1ecfc; --tip-border:#b8a3e8;
+  --important-bg:#fff2e0; --important-border:#eab767;
+  --code-bg:#0f1b2d; --code-text:#d6e2f0;
+  --very-high:#c0392b; --high:#d68910; --medium:#b7950b; --low:#1e8449;
+  --radius:10px; --maxw:900px; --font-scale:1;
+}
+[data-theme="dark"]{
+  --bg:#0f1620; --bg-card:#161f2c; --text:#e7edf5; --text-soft:#a9b6c6;
+  --border:#26313f; --sidebar-bg:#0a0f18; --sidebar-text:#b7c3d6; --sidebar-active:#3a68c2;
+  --accent:#5b8def; --accent-2:#3fbf9a; --formula-bg:#182338; --formula-border:#365a9e;
+  --def-bg:#132a22; --def-border:#2f6b4f; --example-bg:#2b2410; --example-border:#8a742c;
+  --mistake-bg:#301616; --mistake-border:#8a3c3c; --tip-bg:#221c33; --tip-border:#5f4d94;
+  --important-bg:#33240f; --important-border:#a1732f;
+  --code-bg:#050a12; --code-text:#cfe0f5;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; font-family:"Segoe UI", Arial, Helvetica, sans-serif; background:var(--bg); color:var(--text);
+  font-size:calc(16px * var(--font-scale)); line-height:1.6; display:flex; min-height:100vh;
+}
+/* ---------- SIDEBAR ---------- */
+#sidebar{
+  width:290px; flex-shrink:0; background:var(--sidebar-bg); color:var(--sidebar-text);
+  height:100vh; position:sticky; top:0; overflow-y:auto; padding:16px 10px 60px;
+}
+#sidebar h1{font-size:1.05rem; color:#fff; padding:0 8px; margin:4px 0 14px;}
+#sidebar .unit-title{
+  font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:#8fa3c4;
+  margin:16px 8px 6px; font-weight:700;
+}
+#sidebar a{color:var(--sidebar-text); text-decoration:none; display:block; padding:6px 10px;
+  border-radius:6px; font-size:.86rem;}
+#sidebar a:hover{background:rgba(255,255,255,0.08); color:#fff;}
+#sidebar a.active{background:var(--sidebar-active); color:#fff;}
+#sidebar .chapter-link{font-weight:700; color:#e7edf5; margin-top:6px;}
+#sidebar .topic-link{padding-left:22px; font-size:.8rem; color:#9fb0c7;}
+#sidebar .topic-link:hover{color:#fff;}
+#searchBox{
+  width:100%; padding:8px 10px; border-radius:6px; border:1px solid #33455f; background:#0e1826;
+  color:#fff; font-size:.85rem; margin-bottom:8px;
+}
+#searchResults{max-height:260px; overflow-y:auto; margin-bottom:10px;}
+#searchResults div{padding:5px 8px; font-size:.8rem; cursor:pointer; border-radius:6px;}
+#searchResults div:hover{background:rgba(255,255,255,0.1);}
+
+/* ---------- TOP TOOLBAR ---------- */
+#toolbar{
+  position:sticky; top:0; z-index:50; background:var(--bg-card); border-bottom:1px solid var(--border);
+  padding:10px 24px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+#toolbar button{
+  background:var(--bg); border:1px solid var(--border); color:var(--text); padding:6px 12px;
+  border-radius:6px; cursor:pointer; font-size:.82rem;
+}
+#toolbar button:hover{background:var(--accent); color:#fff; border-color:var(--accent);}
+#toolbar .spacer{flex:1;}
+#toolbar .label{font-size:.75rem; color:var(--text-soft);}
+
+/* ---------- MAIN ---------- */
+#main{flex:1; min-width:0;}
+#content{max-width:var(--maxw); margin:0 auto; padding:24px 28px 120px;}
+.chapter-header{
+  border-bottom:3px solid var(--accent); padding-bottom:10px; margin:40px 0 20px;
+}
+.chapter-header h2{margin:0; font-size:1.6rem; color:var(--accent);}
+.unit-banner{
+  background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#fff; padding:26px 30px;
+  border-radius:var(--radius); margin:34px 0 20px;
+}
+.unit-banner h1{margin:0 0 6px; font-size:1.5rem;}
+.unit-banner p{margin:0; opacity:.9; font-size:.9rem;}
+
+.topic{
+  background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px 24px; margin:22px 0; scroll-margin-top:70px;
+}
+.topic-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
+.topic-head h3{margin:0; font-size:1.25rem; color:var(--text);}
+.badge{
+  display:inline-block; padding:3px 10px; border-radius:20px; font-size:.72rem; font-weight:700;
+  color:#fff; white-space:nowrap;
+}
+.badge.vh{background:var(--very-high);}
+.badge.h{background:var(--high);}
+.badge.m{background:var(--medium);}
+.badge.l{background:var(--low);}
+
+.topic-controls{display:flex; align-items:center; gap:6px;}
+.progress-btn{
+  border:1px solid var(--border); background:var(--bg); color:var(--text-soft); font-size:.75rem;
+  padding:4px 8px; border-radius:6px; cursor:pointer;
+}
+.progress-btn.status-1{background:#fdf3d0; border-color:#e0c34d; color:#7a5d00;}
+.progress-btn.status-2{background:#d7f2e3; border-color:#5cbf8c; color:#116139;}
+.bookmark-btn{background:none; border:none; cursor:pointer; font-size:1.1rem; color:var(--text-soft);}
+.bookmark-btn.active{color:#e0a200;}
+
+.subhead{font-weight:700; margin:16px 0 6px; font-size:.95rem; color:var(--accent);}
+.box{border-radius:8px; padding:12px 14px; margin:10px 0; font-size:.94rem;}
+.box.def{background:var(--def-bg); border-left:4px solid var(--def-border);}
+.box.example{background:var(--example-bg); border-left:4px solid var(--example-border);}
+.box.formula{background:var(--formula-bg); border-left:4px solid var(--formula-border); font-family:"Cambria Math", Georgia, serif; font-size:1.02rem;}
+.box.mistake{background:var(--mistake-bg); border-left:4px solid var(--mistake-border);}
+.box.tip{background:var(--tip-bg); border-left:4px solid var(--tip-border);}
+.box.important{background:var(--important-bg); border-left:4px solid var(--important-border); font-weight:600;}
+
+table{border-collapse:collapse; width:100%; margin:10px 0; font-size:.88rem;}
+th,td{border:1px solid var(--border); padding:6px 10px; text-align:left;}
+th{background:var(--bg); color:var(--accent);}
+code, pre{font-family:Consolas, monospace; background:var(--code-bg); color:var(--code-text);}
+pre{padding:12px 14px; border-radius:8px; overflow-x:auto; font-size:.82rem; line-height:1.5;}
+code.inline{padding:1px 5px; border-radius:4px;}
+svg.diagram{max-width:100%; height:auto; display:block; margin:10px auto;}
+ul,ol{padding-left:22px;}
+.qa-section{margin-top:14px;}
+.qa-section h4{color:var(--accent-2); font-size:1rem; margin-bottom:6px;}
+details{margin:6px 0;}
+details summary{cursor:pointer; font-weight:600; color:var(--text);}
+.revision-box{background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; margin:20px 0;}
+.priority-list{list-style:none; padding-left:0;}
+.priority-list li{padding:4px 0;}
+
+#backToTop{
+  position:fixed; bottom:26px; right:26px; background:var(--accent); color:#fff; border:none;
+  width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer; display:none; z-index:60;
+  box-shadow:0 3px 10px rgba(0,0,0,0.3);
+}
+#mobileToggle{display:none;}
+
+@media print{
+  #sidebar, #toolbar, #backToTop, .topic-controls, .bookmark-btn{display:none !important;}
+  body{display:block;}
+  #content{max-width:100%; padding:0;}
+  .topic{break-inside:avoid; border:1px solid #999;}
+}
+@media (max-width:900px){
+  body{display:block;}
+  #sidebar{position:fixed; left:-300px; top:0; z-index:100; transition:left .2s; width:270px;}
+  #sidebar.open{left:0;}
+  #mobileToggle{display:inline-block;}
+  #content{padding:16px;}
+}
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <h1>📘 DL/ML Study Portal</h1>
+  <input type="text" id="searchBox" placeholder="🔍 Search all topics...">
+  <div id="searchResults"></div>
+  <div id="navTree">
+
+<div class="unit-title">Unit 1</div>
+<a href="#unit1" class="chapter-link">UNIT 1 Overview</a>
+<a href="#ch1" class="chapter-link">Chapter 1: Linear Algebra</a>
+<a href="#t-scalars" class="topic-link">1. Scalars</a>
+<a href="#t-vectors" class="topic-link">2. Vectors</a>
+<a href="#t-matrices-tensors" class="topic-link">3. Matrices and Tensors</a>
+<a href="#t-matrix-ops" class="topic-link">4. Matrix Operations</a>
+<a href="#t-types-matrices" class="topic-link">5. Types of Matrices</a>
+<a href="#t-norms" class="topic-link">6. Norms</a>
+<a href="#t-eigen" class="topic-link">7. Eigen Decomposition</a>
+<a href="#t-svd" class="topic-link">8. SVD</a>
+<a href="#t-pca" class="topic-link">9. PCA</a>
+<a href="#ch2" class="chapter-link">Chapter 2: Probability & Info Theory</a>
+<a href="#t-random-variables" class="topic-link">1. Random Variables</a>
+<a href="#t-prob-dist" class="topic-link">2. Probability Distributions</a>
+<a href="#t-marginal" class="topic-link">3. Marginal Probability</a>
+<a href="#t-conditional" class="topic-link">4. Conditional Probability</a>
+<a href="#t-expectation" class="topic-link">5. Expectation</a>
+<a href="#t-var-cov" class="topic-link">6. Variance and Covariance</a>
+<a href="#t-bayes" class="topic-link">7. Bayes' Rule</a>
+<a href="#t-info-theory" class="topic-link">8. Information Theory</a>
+<a href="#ch3" class="chapter-link">Chapter 3: Numerical Computation</a>
+<a href="#t-overflow-underflow" class="topic-link">1. Overflow and Underflow</a>
+<a href="#t-gradient-opt" class="topic-link">2. Gradient-Based Optimization</a>
+<a href="#t-constrained-opt" class="topic-link">3. Constrained Optimization</a>
+<a href="#t-least-squares" class="topic-link">4. Linear Least Squares</a>
+<a href="#unit1-revision" class="chapter-link">📚 Unit 1 Revision</a>
+
+<!-- SIDEBAR_INSERT_POINT -->
+  </div>
+</nav>
+
+<div id="main">
+  <div id="toolbar">
+    <button id="mobileToggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+    <button onclick="toggleTheme()">🌙/☀️ Theme</button>
+    <button onclick="changeFont(-1)">A−</button>
+    <button onclick="changeFont(0)">A</button>
+    <button onclick="changeFont(1)">A+</button>
+    <button onclick="window.print()">🖨️ Print / PDF</button>
+    <button onclick="showBookmarksOnly()">⭐ Bookmarks</button>
+    <button onclick="clearFilter()">Show All</button>
+    <span class="spacer"></span>
+    <span class="label" id="progressSummary"></span>
+  </div>
+
+  <div id="content">
+
+  <div class="unit-banner">
+    <h1>Deep Learning & Machine Learning — Complete University Exam Notes</h1>
+    <p>Covers Unit 1 (Ch.1–3), Unit 2 (Ch.5–6), Unit 3 (Ch.4–5). Use the sidebar or search to jump to any topic. Mark progress ☐ ◐ ✓, bookmark ⭐ important topics, and use Final Exam Revision before the exam.</p>
+  </div>
+
+
+  <div class="unit-banner" id="unit1">
+    <h1>UNIT 1</h1>
+    <p>Chapter 1: Linear Algebra &nbsp;·&nbsp; Chapter 2: Probability and Information Theory &nbsp;·&nbsp; Chapter 3: Numerical Computation</p>
+  </div>
+<div class="chapter-header" id="ch1"><h2>Chapter 1: Linear Algebra</h2></div>
+  <div class="topic" id="t-scalars">
+    <div class="topic-head">
+      <h3>1. Scalars</h3>
+      <div class="topic-controls">
+        <span class="badge l">🟢 LOW PRIORITY</span>
+        <button class="progress-btn" data-id="t-scalars" onclick="cycleProgress('t-scalars')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-scalars" onclick="toggleBookmark('t-scalars')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Foundational vocabulary term; rarely asked alone but used to define vectors/matrices. Quick 2-mark question material.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">A <b>scalar</b> is a single, standalone numerical quantity — just one number, as opposed to an ordered collection of numbers. Scalars are usually written in italic lowercase letters, e.g. <i>s</i>, <i>n</i>, <i>x</i>. They belong to a set such as ℝ (real numbers) or ℕ (natural numbers).</div>
+<div class="subhead">🧠 Intuition</div><p>Think of a scalar as a "plain number" — temperature (25°C), a learning rate (0.01), or the number of layers in a network (5). It has magnitude only, no direction or structure.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>In machine learning, scalars appear as hyperparameters (learning rate α, regularization coefficient λ), as individual entries inside vectors/matrices/tensors, and as outputs of loss functions (a single number summarizing model error). Formally we write <i>s</i> ∈ ℝ to state "s is a real-valued scalar".</p>
+<div class="subhead">💡 Simple Example</div><p>s = 7, π = 3.14159, or a single pixel intensity value 235.</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>The loss value returned by a loss function (e.g., Cross-Entropy Loss = 0.023) is a scalar; the learning rate used in gradient descent update is a scalar.</p>
+<div class="subhead">✅ Advantages</div><p>Simplest possible mathematical object — easy to manipulate with ordinary arithmetic.</p>
+<div class="subhead">❌ Limitations</div><p>Cannot represent multi-dimensional relationships (direction, spatial structure) — for that we need vectors, matrices, tensors.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div>
+<table><tr><th>Object</th><th>Dimension</th><th>Example</th></tr>
+<tr><td>Scalar</td><td>0-D</td><td>5</td></tr>
+<tr><td>Vector</td><td>1-D</td><td>[5, 2, 9]</td></tr>
+<tr><td>Matrix</td><td>2-D</td><td>3×3 grid of numbers</td></tr>
+<tr><td>Tensor</td><td>n-D</td><td>RGB image (H×W×3)</td></tr></table>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Scalars are 0-dimensional (rank-0 tensors).</li><li>Denoted by lowercase italics.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define a scalar with an example.</li><li>(2M) Differentiate scalar and vector.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-vectors">
+    <div class="topic-head">
+      <h3>2. Vectors</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-vectors" onclick="cycleProgress('t-vectors')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-vectors" onclick="toggleBookmark('t-vectors')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Building block for representing data points/features; needed to understand norms, dot products, gradients.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">A <b>vector</b> is an ordered array of numbers (scalars), arranged in a single row or column. A vector of size n is written as <b>x</b> ∈ ℝⁿ, x = [x₁, x₂, ..., xₙ]ᵀ. Each xᵢ is called a component/element, and i is its index.</div>
+<div class="subhead">🧠 Intuition</div><p>A vector can be thought of as a point in n-dimensional space, or as an arrow from the origin to that point — carrying both magnitude and direction. In ML, a vector typically represents one data sample described by n features.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>Vectors support element-wise operations (addition, subtraction, scalar multiplication) and the dot product. Column vectors are the default convention in deep learning (x is n×1). Indexing: x₁ is the first element; x<sub>-1</sub> sometimes denotes "all elements except the first" in set notation used by Goodfellow et al.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">x = [x₁, x₂, …, xₙ]ᵀ &nbsp;&nbsp; x ∈ ℝⁿ <br>Addition: (x + y)ᵢ = xᵢ + yᵢ <br>Scalar multiply: (αx)ᵢ = α·xᵢ <br>Dot product: x·y = Σᵢ xᵢyᵢ (a scalar)</div>
+<div class="subhead">💡 Simple Example</div><p>x = [2, 4, 6], y = [1, 0, 3]. x + y = [3, 4, 9]. x·y = 2·1 + 4·0 + 6·3 = 20.</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>A house described by [area, #bedrooms, age] = [1500, 3, 10] is a feature vector; a word embedding (e.g., 300-dim vector for "king") is a vector.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+<line x1="30" y1="190" x2="280" y2="190" stroke="#888" stroke-width="1"/>
+<line x1="30" y1="190" x2="30" y2="20" stroke="#888" stroke-width="1"/>
+<line x1="30" y1="190" x2="220" y2="60" stroke="#2f57a3" stroke-width="3" marker-end="url(#arrowhead1)"/>
+<defs><marker id="arrowhead1" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2f57a3"/></marker></defs>
+<text x="225" y="55" font-size="12" fill="#2f57a3">x = [190,130]</text>
+<text x="140" y="210" font-size="11" fill="#666">Vector as arrow from origin in 2D space</text>
+</svg>
+<p style="font-size:.85rem;color:var(--text-soft);">Exam drawing tip: draw two axes, then one arrow from origin to point (a,b), label with the vector.</p>
+<div class="subhead">✅ Advantages</div><p>Compact representation of multi-feature data; enables linear algebra operations used throughout ML (dot products for similarity, projections).</p>
+<div class="subhead">❌ Limitations</div><p>Only 1-D structure — cannot capture relationships between two independent dimensions (needs matrix/tensor).</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>Vector (1-D) vs Matrix (2-D) vs Tensor (n-D): a vector is a special case of a matrix with one column (or row).</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Confusing row vector and column vector orientation when multiplying with matrices; forgetting the transpose symbol ᵀ.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Vectors are rank-1 tensors.</li><li>Dot product of orthogonal vectors = 0.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) What is a vector? Give an example.</li><li>(5M) Explain vector operations with examples (addition, scalar multiplication, dot product).</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-matrices-tensors">
+    <div class="topic-head">
+      <h3>3. Matrices and Tensors</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-matrices-tensors" onclick="cycleProgress('t-matrices-tensors')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-matrices-tensors" onclick="toggleBookmark('t-matrices-tensors')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Core data structure of deep learning — weight matrices, batch tensors. Frequently tested with dimension/notation questions.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">A <b>matrix</b> A ∈ ℝ<sup>m×n</sup> is a 2-D array of numbers with m rows and n columns; element in row i, column j is A<sub>i,j</sub>. A <b>tensor</b> generalizes this to any number of dimensions (an n-dimensional array), written A<sub>i,j,k,...</sub>.</div>
+<div class="subhead">🧠 Intuition</div><p>A matrix is a "table" of numbers — think of a grayscale image as a matrix of pixel intensities. A tensor is a matrix extended to more axes — a color image (height × width × channels) is a rank-3 tensor; a batch of color images (batch × height × width × channels) is a rank-4 tensor.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>Matrices are indexed with two subscripts (row, column). Rows are extracted as A<sub>i,:</sub>, columns as A<sub>:,j</sub>. Tensors extend indexing to k subscripts. In deep learning frameworks (PyTorch/TensorFlow), all data — inputs, weights, activations, gradients — are stored as tensors; a scalar is a rank-0 tensor, vector rank-1, matrix rank-2.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">A ∈ ℝ<sup>m×n</sup>, A = [A<sub>i,j</sub>], i=1..m, j=1..n <br>Tensor: T ∈ ℝ<sup>d₁×d₂×...×d_k</sup>, rank = k</div>
+<div class="subhead">💡 Simple Example</div><p>A = [[1,2,3],[4,5,6]] is a 2×3 matrix. A<sub>1,2</sub> = 2 (using 1-indexing), A<sub>2,3</sub> = 6.</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>A CNN input image batch of 32 RGB images sized 64×64 is a tensor of shape (32, 64, 64, 3) — rank 4.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg">
+<g font-size="11" fill="#333">
+<rect x="10" y="55" width="30" height="30" fill="#eef3ff" stroke="#2f57a3"/><text x="18" y="105" fill="#666">Scalar</text>
+<rect x="80" y="40" width="18" height="60" fill="#eef3ff" stroke="#2f57a3"/>
+<rect x="100" y="40" width="18" height="60" fill="#eef3ff" stroke="#2f57a3"/>
+<rect x="120" y="40" width="18" height="60" fill="#eef3ff" stroke="#2f57a3"/>
+<text x="80" y="115" fill="#666">Vector</text>
+<rect x="180" y="30" width="20" height="20" fill="#eef3ff" stroke="#2f57a3"/><rect x="200" y="30" width="20" height="20" fill="#eef3ff" stroke="#2f57a3"/><rect x="220" y="30" width="20" height="20" fill="#eef3ff" stroke="#2f57a3"/>
+<rect x="180" y="50" width="20" height="20" fill="#eef3ff" stroke="#2f57a3"/><rect x="200" y="50" width="20" height="20" fill="#eef3ff" stroke="#2f57a3"/><rect x="220" y="50" width="20" height="20" fill="#eef3ff" stroke="#2f57a3"/>
+<rect x="180" y="70" width="20" height="20" fill="#eef3ff" stroke="#2f57a3"/><rect x="200" y="70" width="20" height="20" fill="#eef3ff" stroke="#2f57a3"/><rect x="220" y="70" width="20" height="20" fill="#eef3ff" stroke="#2f57a3"/>
+<text x="185" y="105" fill="#666">Matrix</text>
+<g transform="translate(290,20)">
+<rect x="0" y="0" width="18" height="18" fill="#eefaf5" stroke="#0e8a6d"/><rect x="18" y="0" width="18" height="18" fill="#eefaf5" stroke="#0e8a6d"/>
+<rect x="8" y="8" width="18" height="18" fill="#eefaf5" stroke="#0e8a6d" opacity="0.7"/><rect x="26" y="8" width="18" height="18" fill="#eefaf5" stroke="#0e8a6d" opacity="0.7"/>
+<rect x="16" y="16" width="18" height="18" fill="#eefaf5" stroke="#0e8a6d" opacity="0.5"/><rect x="34" y="16" width="18" height="18" fill="#eefaf5" stroke="#0e8a6d" opacity="0.5"/>
+</g>
+<text x="290" y="115" fill="#666">Tensor (3D+)</text>
+</g>
+</svg>
+<div class="subhead">✅ Advantages</div><p>Unified representation for all data shapes; efficient GPU parallel computation via tensor operations.</p>
+<div class="subhead">❌ Limitations</div><p>Higher-rank tensors are harder to visualize and reason about; computationally expensive for very large ranks/sizes.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div>
+<table><tr><th>Rank</th><th>Name</th><th>Example</th></tr><tr><td>0</td><td>Scalar</td><td>5</td></tr><tr><td>1</td><td>Vector</td><td>[1,2,3]</td></tr><tr><td>2</td><td>Matrix</td><td>image (grayscale)</td></tr><tr><td>≥3</td><td>Tensor</td><td>RGB image, video, batch</td></tr></table>
+<div class="subhead">⚠️ Common Mistakes</div><p>Mixing up row-major vs column-major indexing; confusing matrix shape (rows×cols) order.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Matrix transpose: (Aᵀ)<sub>i,j</sub> = A<sub>j,i</sub>.</li><li>Tensor rank = number of axes/indices needed.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define matrix and tensor.</li><li>(5M) Differentiate scalar, vector, matrix, and tensor with examples and diagram.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-matrix-ops">
+    <div class="topic-head">
+      <h3>4. Matrix Operations</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-matrix-ops" onclick="cycleProgress('t-matrix-ops')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-matrix-ops" onclick="toggleBookmark('t-matrix-ops')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Directly tested via numerical problems (multiplication, transpose); essential for understanding neural network forward pass (Wx+b).</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">Matrix operations include <b>addition</b>, <b>scalar multiplication</b>, <b>transpose</b>, <b>matrix multiplication</b>, and <b>matrix inverse</b> — the algebraic rules that let matrices be combined and manipulated.</div>
+<div class="subhead">🧠 Intuition</div><p>Matrix multiplication composes linear transformations — e.g., multiplying an input vector by a weight matrix "transforms" it into a new space (this is exactly what a neural network layer does).</p>
+<div class="subhead">📖 Detailed Explanation</div><p><b>Addition:</b> element-wise, requires same shape. <b>Transpose:</b> flips rows/columns. <b>Multiplication:</b> C = AB is valid only if #columns(A) = #rows(B); C<sub>i,j</sub> = Σ<sub>k</sub> A<sub>i,k</sub>B<sub>k,j</sub>. Matrix multiplication is associative and distributive but NOT commutative (AB ≠ BA in general). <b>Inverse:</b> A⁻¹ exists only for square, non-singular (det ≠ 0) matrices, and satisfies AA⁻¹ = I.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">C = AB ⟹ C<sub>i,j</sub> = Σ<sub>k=1</sub><sup>n</sup> A<sub>i,k</sub> B<sub>k,j</sub> <br>(AB)ᵀ = Bᵀ Aᵀ &nbsp;&nbsp; (A+B)ᵀ = Aᵀ + Bᵀ <br>AA⁻¹ = A⁻¹A = I</div>
+<div class="subhead">📐 Derivation</div><p>DERIVATION NOT REQUIRED — understand the rule and dimension compatibility; be ready to compute numerically.</p>
+<div class="subhead">💡 Simple Example</div><p>A = [[1,2],[3,4]], B = [[5,6],[7,8]]. AB = [[1·5+2·7, 1·6+2·8],[3·5+4·7, 3·6+4·8]] = [[19,22],[43,50]].</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Forward pass of a dense layer: z = Wx + b, where W is the weight matrix, x the input vector, b the bias vector — this is matrix-vector multiplication plus addition.</p>
+<div class="subhead">⚙️ Algorithm / Procedure</div><p>To multiply A(m×n) and B(n×p): for each i in 1..m, for each j in 1..p, compute C<sub>i,j</sub> as the dot product of row i of A and column j of B.</p>
+<div class="subhead">📝 Pseudocode</div>
+<pre>for i in range(m):
+  for j in range(p):
+    C[i][j] = sum(A[i][k]*B[k][j] for k in range(n))</pre>
+<div class="subhead">✅ Advantages</div><p>Enables compact representation of linear systems and transformations; vectorized computation is GPU-friendly.</p>
+<div class="subhead">❌ Limitations</div><p>Matrix multiplication is O(n³) for naive algorithm — costly for very large matrices; not commutative, easy to misapply.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>Element-wise (Hadamard) product A⊙B differs from matrix multiplication AB — Hadamard requires identical shapes and multiplies corresponding entries only.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Assuming AB = BA (false in general); trying to multiply matrices with incompatible shapes; forgetting (AB)ᵀ = BᵀAᵀ (order reverses).</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Multiplication rule: (m×n)·(n×p) = (m×p).</li><li>Not commutative; associative and distributive.</li><li>(AB)⁻¹ = B⁻¹A⁻¹ (order reverses, when both invertible).</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(5M) Explain matrix multiplication with a numerical example.</li><li>(10M) Discuss properties of matrix operations (associativity, distributivity, commutativity, transpose rules) with proofs/examples.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-types-matrices">
+    <div class="topic-head">
+      <h3>5. Types of Matrices</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-types-matrices" onclick="cycleProgress('t-types-matrices')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-types-matrices" onclick="toggleBookmark('t-types-matrices')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Frequently asked as 2-mark definition/identify questions; special matrices (diagonal, symmetric, orthogonal) reappear in eigen-decomposition and SVD.</p>
+<div class="subhead">📌 Definition & Types</div>
+<table><tr><th>Type</th><th>Definition</th></tr>
+<tr><td>Square matrix</td><td>#rows = #columns (n×n)</td></tr>
+<tr><td>Diagonal matrix</td><td>All off-diagonal entries are 0 (D<sub>i,j</sub>=0 for i≠j)</td></tr>
+<tr><td>Identity matrix (I)</td><td>Diagonal matrix with all diagonal entries = 1; AI = A</td></tr>
+<tr><td>Symmetric matrix</td><td>A = Aᵀ, i.e. A<sub>i,j</sub> = A<sub>j,i</sub></td></tr>
+<tr><td>Orthogonal matrix</td><td>AᵀA = AAᵀ = I, i.e. Aᵀ = A⁻¹; rows/columns are orthonormal</td></tr>
+<tr><td>Singular matrix</td><td>det(A) = 0, so A⁻¹ does not exist</td></tr>
+<tr><td>Positive Definite matrix</td><td>xᵀAx &gt; 0 for all non-zero x; all eigenvalues &gt; 0</td></tr>
+</table>
+<div class="subhead">🧠 Intuition</div><p>Special matrices have geometric meaning: orthogonal matrices represent pure rotations/reflections (they preserve vector length); diagonal matrices scale each axis independently, making them computationally cheap.</p>
+<div class="subhead">💡 Simple Example</div><p>Identity: I = [[1,0],[0,1]]. Symmetric: [[2,5],[5,3]]. Diagonal: [[4,0],[0,9]].</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Covariance matrices in PCA are always symmetric positive semi-definite; rotation matrices used in data augmentation are orthogonal.</p>
+<div class="subhead">✅ Advantages</div><p>Special structure allows faster computation (e.g., inverse of diagonal matrix = reciprocal of each entry) and guarantees useful properties (orthogonal matrices preserve norms).</p>
+<div class="subhead">❌ Limitations</div><p>Not all real matrices fall into these convenient categories — general (dense, asymmetric) matrices need full computation.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Confusing "symmetric" with "square" (all symmetric matrices are square, but not vice versa); assuming every square matrix is invertible.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Orthogonal ⟹ Aᵀ = A⁻¹ (very testable).</li><li>Covariance matrices used in PCA are symmetric.</li><li>det(A)=0 ⟺ singular ⟺ no inverse.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define orthogonal matrix.</li><li>(2M) What is a singular matrix?</li><li>(5M) List and explain 5 special types of matrices with examples.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-norms">
+    <div class="topic-head">
+      <h3>6. Norms</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-norms" onclick="cycleProgress('t-norms')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-norms" onclick="toggleBookmark('t-norms')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Direct numerical-problem topic (compute L1, L2, L∞, Frobenius norm); underlies regularization (Ch.4) and distance metrics.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">A <b>norm</b> is a function that measures the "size" or length of a vector. Formally, ‖x‖<sub>p</sub> is a function satisfying: (1) ‖x‖=0 ⟺ x=0, (2) ‖αx‖ = |α|‖x‖, (3) triangle inequality ‖x+y‖ ≤ ‖x‖+‖y‖.</div>
+<div class="subhead">🧠 Intuition</div><p>Norms generalize the everyday notion of "distance from origin". Different norms weight large vs. small components differently — L1 treats all deviations linearly (promotes sparsity), L2 penalizes large components quadratically (smooth, unique solutions).</p>
+<div class="subhead">📖 Detailed Explanation</div><p>The general Lᵖ norm: ‖x‖<sub>p</sub> = (Σᵢ|xᵢ|<sup>p</sup>)<sup>1/p</sup>. Special cases: L1 (Manhattan/taxicab norm) sums absolute values; L2 (Euclidean norm) is the familiar straight-line distance; L∞ (max norm) returns the largest absolute component. The Frobenius norm extends L2 to matrices.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">L1 norm: ‖x‖₁ = Σᵢ|xᵢ| <br>L2 norm: ‖x‖₂ = √(Σᵢ xᵢ²) <br>L∞ norm: ‖x‖<sub>∞</sub> = maxᵢ|xᵢ| <br>Frobenius norm (matrix): ‖A‖<sub>F</sub> = √(Σᵢ,ⱼ A<sub>i,j</sub>²)</div>
+<div class="subhead">📐 Derivation</div><p>DERIVATION NOT REQUIRED for the general norm axioms — but be ready to derive that L2² = xᵀx: ‖x‖₂² = Σᵢxᵢ² = x·x = xᵀx (used constantly in regularization derivations).</p>
+<div class="subhead">💡 Simple Example</div><p>x = [3, -4]. ‖x‖₁ = 3+4 = 7. ‖x‖₂ = √(9+16) = √25 = 5. ‖x‖<sub>∞</sub> = max(3,4) = 4.</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>L2 norm of weight vector is added as penalty in Ridge Regression / L2 regularization (weight decay); L1 norm penalty in Lasso induces sparse (many-zero) weights.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(40,65)">
+<line x1="-30" y1="0" x2="30" y2="0" stroke="#999"/><line x1="0" y1="-30" x2="0" y2="30" stroke="#999"/>
+<polygon points="20,0 0,20 -20,0 0,-20" fill="none" stroke="#2f57a3" stroke-width="2"/>
+<text x="-15" y="45" font-size="10">L1 ball (diamond)</text>
+</g>
+<g transform="translate(180,65)">
+<line x1="-30" y1="0" x2="30" y2="0" stroke="#999"/><line x1="0" y1="-30" x2="0" y2="30" stroke="#999"/>
+<circle cx="0" cy="0" r="20" fill="none" stroke="#0e8a6d" stroke-width="2"/>
+<text x="-12" y="45" font-size="10">L2 ball (circle)</text>
+</g>
+</svg>
+<p style="font-size:.85rem;color:var(--text-soft);">Exam tip: draw the diamond (L1) vs circle (L2) constraint regions — this is used to explain why L1 induces sparsity (corners touch axes).</p>
+<div class="subhead">✅ Advantages</div><p>Provide a principled way to measure error/magnitude; L1 encourages sparse solutions (feature selection); L2 gives smooth, differentiable penalty with unique minimum.</p>
+<div class="subhead">❌ Limitations</div><p>L1 is non-differentiable at 0 (needs sub-gradient methods); L2 does not zero-out weights, so no automatic feature selection.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div>
+<table><tr><th>Norm</th><th>Formula</th><th>Property</th></tr>
+<tr><td>L1</td><td>Σ|xᵢ|</td><td>Sparse solutions, robust to outliers</td></tr>
+<tr><td>L2</td><td>√Σxᵢ²</td><td>Smooth, unique min, sensitive to outliers</td></tr>
+<tr><td>L∞</td><td>max|xᵢ|</td><td>Focuses on worst-case component</td></tr></table>
+<div class="subhead">⚠️ Common Mistakes</div><p>Forgetting to take square root in L2 (confusing ‖x‖₂ with ‖x‖₂²); using L1/L2 interchangeably in regularization discussion without noting sparsity difference.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>‖x‖₂² = xᵀx — MEMORIZE, used everywhere.</li><li>L1 → sparsity; L2 → shrinkage without sparsity.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define L1 and L2 norm.</li><li>(5M) Compute L1, L2, L∞ norms for a given vector.</li><li>(10M) Explain norms and their role in regularization, with diagram of L1 vs L2 constraint regions.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-eigen">
+    <div class="topic-head">
+      <h3>7. Eigen Decomposition</h3>
+      <div class="topic-controls">
+        <span class="badge vh">🔥 VERY HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-eigen" onclick="cycleProgress('t-eigen')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-eigen" onclick="toggleBookmark('t-eigen')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>One of the most heavily tested topics — numerical problems (find eigenvalues/eigenvectors), derivation, and conceptual link to PCA/SVD. Expect a 10-15 mark question.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">For a square matrix A, a non-zero vector v is an <b>eigenvector</b> with corresponding <b>eigenvalue</b> λ if: <br><b>Av = λv</b>. <b>Eigen decomposition</b> expresses A as A = VΛV⁻¹, where V is the matrix whose columns are eigenvectors and Λ is a diagonal matrix of eigenvalues.</div>
+<div class="subhead">🧠 Intuition</div><p>Multiplying A by an eigenvector only stretches/shrinks it (by factor λ) without changing its direction. Eigen decomposition reveals the "natural axes" along which a linear transformation acts by pure scaling — this is exactly what PCA exploits to find directions of maximum variance.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>Not every matrix has a real eigen decomposition, but every real <b>symmetric</b> matrix can be decomposed as A = QΛQᵀ, where Q is orthogonal (columns are orthonormal eigenvectors) and Λ is diagonal (eigenvalues on the diagonal). This special case (spectral theorem) is exactly the form used in PCA, since covariance matrices are symmetric.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Av = λv &nbsp;&nbsp;(eigenvalue equation) <br>A = VΛV⁻¹ &nbsp;&nbsp;(general square, diagonalizable A) <br>A = QΛQᵀ &nbsp;&nbsp;(symmetric A, Q orthogonal)</div>
+<div class="subhead">📐 Derivation</div>
+<div class="box formula">Step 1: Start from Av = λv ⟹ Av − λv = 0 ⟹ (A − λI)v = 0.<br>
+Step 2: For a non-zero solution v to exist, (A − λI) must be singular, i.e. det(A − λI) = 0. This is the <b>characteristic equation</b>.<br>
+Step 3: Solve det(A − λI) = 0 for λ (the "characteristic polynomial") to get eigenvalues λ₁, λ₂, ..., λₙ.<br>
+Step 4: For each λᵢ, substitute back into (A − λᵢI)v = 0 and solve the homogeneous system for the corresponding eigenvector vᵢ.<br>
+Step 5: Stack all eigenvectors as columns of V = [v₁ v₂ ... vₙ], and put eigenvalues on the diagonal of Λ. Then A = VΛV⁻¹ (verified since AV = VΛ by construction).</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Let A = [[2,0],[0,3]] (already diagonal). <br>
+Characteristic equation: det(A−λI) = (2−λ)(3−λ) = 0 ⟹ λ₁=2, λ₂=3.<br>
+For λ₁=2: (A−2I)v=0 ⟹ [[0,0],[0,1]]v=0 ⟹ v=[1,0]ᵀ.<br>
+For λ₂=3: (A−3I)v=0 ⟹ [[-1,0],[0,0]]v=0 ⟹ v=[0,1]ᵀ.<br>
+So A = VΛV⁻¹ with V=[[1,0],[0,1]], Λ=[[2,0],[0,3]].</div>
+<p>A slightly less trivial worked example (typical exam problem): A = [[4,1],[2,3]]. det(A−λI) = (4−λ)(3−λ)−2 = λ²−7λ+10 = 0 ⟹ (λ−5)(λ−2)=0 ⟹ λ₁=5, λ₂=2. For λ₁=5: (A−5I)v=0 ⟹ [[-1,1],[2,-2]]v=0 ⟹ v₁=[1,1]ᵀ. For λ₂=2: (A−2I)v=0 ⟹ [[2,1],[2,1]]v=0 ⟹ v₂=[1,-2]ᵀ.</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>PCA computes eigenvectors of the data covariance matrix to find principal directions of variance; PageRank algorithm uses the dominant eigenvector of a link matrix; stability analysis of dynamical systems uses eigenvalues.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(130,75)">
+<line x1="-100" y1="0" x2="100" y2="0" stroke="#ccc"/><line x1="0" y1="-60" x2="0" y2="60" stroke="#ccc"/>
+<line x1="0" y1="0" x2="70" y2="0" stroke="#2f57a3" stroke-width="3" marker-end="url(#a1)"/>
+<line x1="0" y1="0" x2="105" y2="0" stroke="#0e8a6d" stroke-width="3" stroke-dasharray="4,2" marker-end="url(#a2)"/>
+<defs>
+<marker id="a1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#2f57a3"/></marker>
+<marker id="a2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#0e8a6d"/></marker>
+</defs>
+<text x="10" y="-10" font-size="10">v (eigenvector)</text>
+<text x="10" y="20" font-size="10" fill="#0e8a6d">Av = λv (same direction, scaled)</text>
+</g>
+</svg>
+<p style="font-size:.85rem;color:var(--text-soft);">Exam drawing tip: show that Av lies along the same line as v, just longer/shorter — this is the entire geometric meaning of eigenvectors.</p>
+<div class="subhead">⚙️ Algorithm / Procedure</div><p><b>Input:</b> square matrix A (n×n). <b>Output:</b> eigenvalues λᵢ and eigenvectors vᵢ.<br>
+1. Form characteristic equation det(A−λI)=0.<br>2. Solve polynomial for λ values.<br>3. For each λ, solve (A−λI)v=0 for v.<br>4. Normalize eigenvectors (optional, for orthonormal basis).<br>5. Assemble V and Λ; A = VΛV⁻¹.</p>
+<div class="subhead">📝 Pseudocode</div>
+<pre>solve det(A - λI) = 0 for eigenvalues λ_1..λ_n
+for each λ_i:
+    solve (A - λ_i I) v = 0  -> eigenvector v_i
+V = [v_1, v_2, ..., v_n]
+Λ = diag(λ_1, ..., λ_n)
+A = V Λ V⁻¹</pre>
+<div class="subhead">✅ Advantages</div><p>Reveals intrinsic geometric structure of a transformation; diagonal form makes powers of A trivial (Aᵏ = VΛᵏV⁻¹); foundation for PCA, spectral clustering, stability analysis.</p>
+<div class="subhead">❌ Limitations</div><p>Only square matrices have eigenvalues; not all square matrices are diagonalizable (defective matrices); complex eigenvalues can occur for non-symmetric matrices; computationally expensive for very large matrices.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>Eigen decomposition works only for square matrices; SVD (next topic) generalizes this idea to ANY rectangular matrix using two different orthogonal bases instead of one.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Forgetting to set determinant of (A−λI) to zero (using A−λ instead); arithmetic errors solving the quadratic/characteristic polynomial; not normalizing eigenvectors when required; assuming V is always orthogonal (only true when A is symmetric).</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Av = λv is the defining equation — MEMORIZE.</li><li>det(A−λI) = 0 gives eigenvalues.</li><li>Symmetric matrix ⟹ A = QΛQᵀ with orthogonal Q.</li><li>Sum of eigenvalues = trace(A); product of eigenvalues = det(A).</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul>
+<li>(2M) Define eigenvalue and eigenvector.</li>
+<li>(2M) State the characteristic equation.</li>
+<li>(5M) Find eigenvalues and eigenvectors of a given 2×2 matrix.</li>
+<li>(10M) Derive the eigen decomposition of a matrix and explain its geometric meaning with a diagram; solve a numerical example.</li>
+<li>(10M) Explain how eigen decomposition is used in PCA.</li>
+</ul>
+
+  </div>
+
+  <div class="topic" id="t-svd">
+    <div class="topic-head">
+      <h3>8. Singular Value Decomposition (SVD)</h3>
+      <div class="topic-controls">
+        <span class="badge vh">🔥 VERY HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-svd" onclick="cycleProgress('t-svd')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-svd" onclick="toggleBookmark('t-svd')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Extremely important — generalizes eigen decomposition to non-square matrices; used in PCA, dimensionality reduction, recommender systems, pseudo-inverse. Very common 10-15 mark question.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">For ANY real matrix A ∈ ℝ<sup>m×n</sup> (not necessarily square), the <b>Singular Value Decomposition</b> factorizes it as: <br><b>A = UΣVᵀ</b> <br>where U ∈ ℝ<sup>m×m</sup> is orthogonal (left singular vectors), Σ ∈ ℝ<sup>m×n</sup> is a rectangular diagonal matrix of non-negative <b>singular values</b> σ₁≥σ₂≥...≥0, and V ∈ ℝ<sup>n×n</sup> is orthogonal (right singular vectors).</div>
+<div class="subhead">🧠 Intuition</div><p>SVD says: ANY linear transformation can be broken into (1) a rotation Vᵀ, (2) a pure axis-aligned scaling Σ, (3) another rotation U. Geometrically, SVD shows that any matrix maps the unit sphere to an ellipsoid — the singular values are the lengths of the ellipsoid's semi-axes.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>Columns of U are eigenvectors of AAᵀ; columns of V are eigenvectors of AᵀA; singular values σᵢ are the square roots of the (shared, non-zero) eigenvalues of both AAᵀ and AᵀA. Unlike eigen decomposition, SVD exists for EVERY matrix, including rectangular and singular ones.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">A = UΣVᵀ <br>AAᵀ = UΣ²Uᵀ  (eigen decomposition of AAᵀ gives U and σᵢ²) <br>AᵀA = VΣ²Vᵀ  (eigen decomposition of AᵀA gives V and σᵢ²) <br>σᵢ = √(λᵢ of AᵀA or AAᵀ)</div>
+<div class="subhead">📐 Derivation</div>
+<div class="box formula">Step 1: Consider AᵀA (an n×n symmetric, positive semi-definite matrix). By the spectral theorem it can be eigen-decomposed as AᵀA = VΛVᵀ, with V orthogonal and Λ diagonal (eigenvalues ≥ 0).<br>
+Step 2: Define singular values σᵢ = √λᵢ (square roots of eigenvalues of AᵀA), placed in decreasing order in the diagonal matrix Σ.<br>
+Step 3: Define uᵢ = (1/σᵢ) A vᵢ for each σᵢ ≠ 0 — these form the columns of U, and can be shown to be orthonormal and to be eigenvectors of AAᵀ.<br>
+Step 4: Combine: A vᵢ = σᵢ uᵢ for all i ⟹ in matrix form AV = UΣ ⟹ A = UΣVᵀ (since V is orthogonal, V⁻¹=Vᵀ).</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Let A = [[1,0],[0,-2]] (already diagonal, easy case). AᵀA = [[1,0],[0,4]] ⟹ eigenvalues 1, 4 ⟹ singular values σ₁=2, σ₂=1 (sorted). V = I (eigenvectors of AᵀA). U columns computed as A vᵢ/σᵢ: u₁ = A[0,1]ᵀ/2 = [0,-2]ᵀ/2=[0,-1]ᵀ, u₂ = A[1,0]ᵀ/1=[1,0]ᵀ. So A = UΣVᵀ with Σ=diag(2,1).</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>SVD powers PCA (principal components = right singular vectors scaled by singular values), image compression (keep only top-k singular values to reconstruct a close approximation), recommender systems (matrix factorization of user-item ratings), and computing the Moore-Penrose pseudo-inverse A⁺ = VΣ⁺Uᵀ for solving least-squares problems.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 340 120" xmlns="http://www.w3.org/2000/svg">
+<g font-size="11" fill="#333">
+<text x="10" y="20">A</text><text x="30" y="20">=</text>
+<rect x="45" y="5" width="40" height="40" fill="#eef3ff" stroke="#2f57a3"/><text x="52" y="60" fill="#666">U (rotate)</text>
+<text x="95" y="30">×</text>
+<rect x="110" y="5" width="40" height="40" fill="#fff8e6" stroke="#e8c766"/><text x="105" y="60" fill="#666">Σ (scale)</text>
+<text x="160" y="30">×</text>
+<rect x="175" y="5" width="40" height="40" fill="#eefaf5" stroke="#0e8a6d"/><text x="165" y="60" fill="#666">Vᵀ (rotate)</text>
+<text x="240" y="30" font-size="10">unit circle → ellipse under A</text>
+</g>
+</svg>
+<p style="font-size:.85rem;color:var(--text-soft);">Exam drawing tip: draw a unit circle transforming into an ellipse, with axes labeled σ₁, σ₂ — the classic SVD picture.</p>
+<div class="subhead">⚙️ Algorithm / Procedure</div><p><b>Input:</b> matrix A (m×n). <b>Output:</b> U, Σ, V such that A=UΣVᵀ.<br>1. Compute AᵀA.<br>2. Eigen-decompose AᵀA to get eigenvalues λᵢ and eigenvectors (columns of V).<br>3. Set σᵢ=√λᵢ, sort descending, form Σ.<br>4. Compute uᵢ = Avᵢ/σᵢ for non-zero σᵢ to form U.<br>5. Assemble A = UΣVᵀ.</p>
+<div class="subhead">📝 Pseudocode</div>
+<pre>compute M = A^T A
+[V, Λ] = eig(M)          # eigenvectors, eigenvalues
+Σ = sqrt(Λ), sorted descending
+for i in singular values with σ_i != 0:
+    u_i = (A @ v_i) / σ_i
+U = [u_1, ..., u_m]
+return U, Σ, V</pre>
+<div class="subhead">✅ Advantages</div><p>Works for ANY matrix (square, rectangular, singular); numerically stable; enables low-rank approximation (truncated SVD) for compression/denoising; basis for PCA and pseudo-inverse.</p>
+<div class="subhead">❌ Limitations</div><p>Computationally expensive for very large matrices (O(min(m²n, mn²))); result not always intuitive to interpret directly without further processing.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div>
+<table><tr><th>Aspect</th><th>Eigen Decomposition</th><th>SVD</th></tr>
+<tr><td>Applies to</td><td>Square matrices only</td><td>Any matrix (m×n)</td></tr>
+<tr><td>Form</td><td>A=VΛV⁻¹ (or QΛQᵀ if symmetric)</td><td>A=UΣVᵀ</td></tr>
+<tr><td>Basis vectors</td><td>Same space (V)</td><td>Two different orthogonal bases (U, V)</td></tr>
+<tr><td>Always exists?</td><td>No (only diagonalizable matrices)</td><td>Yes, always</td></tr></table>
+<div class="subhead">⚠️ Common Mistakes</div><p>Confusing dimensions of U, Σ, V for non-square A; forgetting singular values must be non-negative and sorted in decreasing order; mixing up SVD of A with eigen decomposition of A directly (SVD uses AᵀA/AAᵀ, not A itself).</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>A = UΣVᵀ — MEMORIZE.</li><li>Singular values = √(eigenvalues of AᵀA).</li><li>SVD exists for every matrix; eigen decomposition does not.</li><li>Truncated SVD (top-k singular values) gives best rank-k approximation (Eckart–Young theorem).</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul>
+<li>(2M) Define SVD.</li>
+<li>(2M) What are singular values?</li>
+<li>(5M) State the relationship between SVD and eigen decomposition of AᵀA and AAᵀ.</li>
+<li>(10M) Derive SVD of a matrix and explain geometric interpretation with diagram.</li>
+<li>(15M) Compare eigen decomposition and SVD; explain applications of SVD in Machine Learning (PCA, compression, pseudo-inverse).</li>
+</ul>
+
+  </div>
+
+  <div class="topic" id="t-pca">
+    <div class="topic-head">
+      <h3>9. Principal Component Analysis (PCA)</h3>
+      <div class="topic-controls">
+        <span class="badge vh">🔥 VERY HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-pca" onclick="cycleProgress('t-pca')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-pca" onclick="toggleBookmark('t-pca')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>One of the highest-yield topics in the whole syllabus — combines eigen decomposition + SVD + variance/covariance; near-guaranteed 10-15 mark question plus numericals.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>PCA</b> is an unsupervised dimensionality-reduction technique that transforms possibly-correlated features into a smaller set of linearly uncorrelated variables called <b>principal components</b>, ordered so the first component captures the maximum possible variance in the data, the second captures the maximum remaining variance orthogonal to the first, and so on.</div>
+<div class="subhead">🧠 Intuition</div><p>Imagine data scattered in a cloud in high dimensions — most of the "spread"/information often lies along just a few directions. PCA finds these directions (axes of maximum spread) and re-expresses the data using them, discarding low-variance directions that contribute little information — this compresses the data while retaining most of its structure.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>PCA proceeds by centering the data (subtracting the mean), computing the covariance matrix of the centered data, and then finding its eigenvectors/eigenvalues (equivalently, via SVD of the centered data matrix). The eigenvectors (principal directions) with the largest eigenvalues (variances) are kept as the new axes; projecting data onto the top-k eigenvectors gives a k-dimensional reduced representation.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Let X be the (mean-centered) data matrix (n samples × d features). <br>Covariance matrix: Σ = (1/n) XᵀX &nbsp;(d×d, symmetric) <br>Eigen decomposition: Σ = WΛWᵀ (W = eigenvectors = principal components, Λ = eigenvalues = variances) <br>Projected data: Z = XW<sub>k</sub> &nbsp;(keep top-k eigenvectors W<sub>k</sub>)</div>
+<div class="subhead">📐 Derivation</div>
+<div class="box formula">Goal: find unit vector w that maximizes the variance of the projection Xw.<br>
+Step 1: Variance of projected data = Var(Xw) = (1/n)(Xw)ᵀ(Xw) = wᵀ[(1/n)XᵀX]w = wᵀΣw, where Σ=(1/n)XᵀX is the covariance matrix.<br>
+Step 2: Maximize wᵀΣw subject to constraint ‖w‖²=wᵀw=1 (unit vector, else variance grows unboundedly).<br>
+Step 3: Use Lagrange multipliers: L(w,λ) = wᵀΣw − λ(wᵀw − 1).<br>
+Step 4: Take derivative w.r.t. w and set to zero: ∂L/∂w = 2Σw − 2λw = 0 ⟹ Σw = λw.<br>
+Step 5: This is exactly the eigenvalue equation! So the optimal w is an eigenvector of Σ, and the maximum variance achieved equals its eigenvalue λ. Choosing the eigenvector with the LARGEST eigenvalue gives the first principal component; the next-largest (orthogonal) gives the second, and so on.</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Data points (already mean-centered): (2,1), (0,-1), (-2,0). <br>
+Covariance matrix Σ = (1/3)XᵀX where X=[[2,1],[0,-1],[-2,0]]. <br>
+XᵀX = [[8,2],[2,2]] ⟹ Σ = [[2.67,0.67],[0.67,0.67]] (approx). <br>
+Solving det(Σ−λI)=0 gives eigenvalues λ₁≈2.9 (large, principal direction along mostly-x-axis), λ₂≈0.44 (small). The eigenvector for λ₁ becomes PC1 — data is projected onto this direction for 1-D reduction, retaining ~87% of total variance (λ₁/(λ₁+λ₂)).</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Compressing a dataset of 1000 correlated gene-expression features down to 20 principal components before feeding into a classifier; face recognition ("Eigenfaces") represents face images using top principal components; visualizing high-dimensional data in 2D/3D for exploration.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(130,80)">
+<line x1="-100" y1="60" x2="100" y2="-60" stroke="#2f57a3" stroke-width="2"/>
+<text x="60" y="-65" font-size="10" fill="#2f57a3">PC1 (max variance)</text>
+<line x1="-30" y1="-40" x2="30" y2="40" stroke="#0e8a6d" stroke-width="2" stroke-dasharray="3,2"/>
+<text x="20" y="55" font-size="10" fill="#0e8a6d">PC2 (orthogonal)</text>
+<circle cx="-40" cy="20" r="3" fill="#333"/><circle cx="-20" cy="10" r="3" fill="#333"/><circle cx="10" cy="-8" r="3" fill="#333"/>
+<circle cx="35" cy="-25" r="3" fill="#333"/><circle cx="-55" cy="30" r="3" fill="#333"/><circle cx="50" cy="-32" r="3" fill="#333"/>
+</g>
+</svg>
+<p style="font-size:.85rem;color:var(--text-soft);">Exam drawing tip: scatter points forming an elongated cloud, draw PC1 along the long axis and PC2 perpendicular — always label axes and points.</p>
+<div class="subhead">⚙️ Algorithm / Procedure</div><p><b>Input:</b> data matrix X (n×d). <b>Output:</b> reduced data Z (n×k).<br>
+1. Mean-center: X ← X − mean(X).<br>2. Compute covariance matrix Σ = (1/n)XᵀX.<br>3. Compute eigenvalues/eigenvectors of Σ (or use SVD of X directly for numerical stability).<br>4. Sort eigenvectors by descending eigenvalue.<br>5. Select top-k eigenvectors as W<sub>k</sub>.<br>6. Project: Z = X W<sub>k</sub>.</p>
+<div class="subhead">📝 Pseudocode</div>
+<pre>X = X - mean(X, axis=0)          # center data
+Sigma = (1/n) * X.T @ X           # covariance matrix
+eigvals, eigvecs = eig(Sigma)
+sort eigvecs by eigvals descending
+W_k = top k eigvecs
+Z = X @ W_k                       # reduced representation</pre>
+<div class="subhead">✅ Advantages</div><p>Reduces dimensionality and noise; removes redundant/correlated features; speeds up downstream learning; enables visualization; components are uncorrelated by construction.</p>
+<div class="subhead">❌ Limitations</div><p>Only captures LINEAR relationships (fails on non-linear manifolds — needs Kernel PCA/t-SNE); components can be hard to interpret; sensitive to feature scaling (must standardize features first); assumes high variance = high importance, which is not always true (e.g., for classification, discriminative directions may have low variance).</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div>
+<table><tr><th>Aspect</th><th>PCA</th><th>Eigen Decomp</th><th>SVD</th></tr>
+<tr><td>Goal</td><td>Dimensionality reduction</td><td>General matrix factorization</td><td>General matrix factorization</td></tr>
+<tr><td>Uses</td><td>Eigen decomp of covariance (or SVD of X)</td><td>Building block for PCA</td><td>Numerically stable way to do PCA</td></tr>
+<tr><td>Input needed</td><td>Data matrix</td><td>Square matrix</td><td>Any matrix</td></tr></table>
+<div class="subhead">⚠️ Common Mistakes</div><p>Forgetting to mean-center (and often standardize) the data before PCA; confusing eigenvalues (variance explained) with eigenvectors (directions); selecting components arbitrarily instead of by descending eigenvalue / explained variance ratio.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Principal components = eigenvectors of covariance matrix, ranked by eigenvalue.</li><li>Explained variance ratio = λᵢ / Σλⱼ.</li><li>PCA can be computed via SVD of the centered data matrix directly (more numerically stable than forming XᵀX).</li><li>PCA is linear and unsupervised — does not use labels.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul>
+<li>(2M) Define PCA.</li>
+<li>(2M) What is "explained variance"?</li>
+<li>(5M) List the steps of the PCA algorithm.</li>
+<li>(10M) Derive PCA as a variance-maximization problem using Lagrange multipliers, showing it reduces to an eigenvalue problem.</li>
+<li>(15M) Explain PCA fully: motivation, derivation, algorithm, numerical example, advantages/limitations, and its relation to SVD.</li>
+</ul>
+
+  </div>
+<div class="chapter-header" id="ch2"><h2>Chapter 2: Probability and Information Theory</h2></div>
+  <div class="topic" id="t-random-variables">
+    <div class="topic-head">
+      <h3>1. Random Variables</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-random-variables" onclick="cycleProgress('t-random-variables')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-random-variables" onclick="toggleBookmark('t-random-variables')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Foundational vocabulary — usually a 2-mark definition question, but essential to understand every other topic in this chapter.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">A <b>random variable</b> X is a variable that can take on different values randomly/stochastically, each with an associated probability. It can be <b>discrete</b> (finite/countable set of values, e.g., dice roll) or <b>continuous</b> (uncountably infinite values over an interval, e.g., height, temperature).</div>
+<div class="subhead">🧠 Intuition</div><p>A random variable is a rule that maps outcomes of a random process to numbers. It does not have a fixed value — instead it is described by how likely each of its possible values is.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>Discrete random variables are described by a Probability Mass Function (PMF), P(X=x); continuous random variables are described by a Probability Density Function (PDF), p(x), where probability is obtained by integrating over an interval (P(a≤X≤b) = ∫ₐᵇ p(x)dx). Random variables are usually written with uppercase letters (X), and their possible realizations with lowercase (x).</p>
+<div class="subhead">💡 Simple Example</div><p>X = outcome of a fair die roll: X ∈ {1,2,3,4,5,6}, each with probability 1/6 (discrete). Y = height of a randomly selected student (continuous).</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>In classification, the true class label Y and predicted probability output of a softmax layer are treated as random variables; in generative models, pixel values of an image are modeled as random variables.</p>
+<div class="subhead">✅ Advantages</div><p>Provides rigorous mathematical language for describing uncertainty, which is central to ML (noisy data, uncertain predictions).</p>
+<div class="subhead">❌ Limitations</div><p>Requires knowing/estimating the underlying distribution, which is often unknown in practice and must be approximated from data.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Confusing a random variable (the function/rule) with its realization (a specific observed value); treating PDF values as probabilities directly (a PDF value can exceed 1; only the integral gives probability).</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Discrete → PMF; Continuous → PDF.</li><li>Σ P(x)=1 for discrete; ∫p(x)dx=1 for continuous.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define random variable with example.</li><li>(2M) Differentiate discrete and continuous random variables.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-prob-dist">
+    <div class="topic-head">
+      <h3>2. Probability Distributions</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-prob-dist" onclick="cycleProgress('t-prob-dist')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-prob-dist" onclick="toggleBookmark('t-prob-dist')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Commonly tested — need to know PMF/PDF properties and common named distributions (Bernoulli, Gaussian).</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">A <b>probability distribution</b> describes how likely a random variable is to take on each of its possible values. For discrete variables this is the PMF P(X=x); for continuous variables this is the PDF p(x).</div>
+<div class="subhead">🧠 Intuition</div><p>A distribution is the complete "shape" describing uncertainty about a variable — e.g. a bell curve (Gaussian) says values near the mean are most likely, with likelihood falling off symmetrically.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>Key properties: PMF requires P(x)≥0 for all x, and Σₓ P(x)=1. PDF requires p(x)≥0, and ∫p(x)dx=1 (note p(x) itself is NOT a probability — only areas under the curve are). Common distributions in ML: <b>Bernoulli</b> (single binary trial, P(X=1)=φ), <b>Gaussian/Normal</b> N(μ,σ²) (bell curve, most common assumption for continuous noise), <b>Multinoulli/Categorical</b> (generalizes Bernoulli to K categories, used in softmax outputs), <b>Uniform</b> (equal probability over a range).</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Bernoulli: P(X=x) = φ<sup>x</sup>(1−φ)<sup>1−x</sup>, x∈{{0,1}} <br>Gaussian PDF: p(x) = (1/√(2πσ²)) · exp(−(x−μ)²/(2σ²))</div>
+<div class="subhead">💡 Simple Example</div><p>Coin toss: Bernoulli with φ=0.5. Exam scores approximated as Gaussian with μ=70, σ=10.</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Binary classification output modeled as Bernoulli; weight initialization sampled from Gaussian/Uniform distribution; softmax output modeled as Multinoulli (categorical) distribution over classes.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg">
+<path d="M20,90 C60,90 70,10 130,10 C190,10 200,90 240,90" fill="none" stroke="#2f57a3" stroke-width="2"/>
+<line x1="10" y1="90" x2="250" y2="90" stroke="#999"/>
+<text x="110" y="105" font-size="10">Gaussian (bell curve) PDF</text>
+</svg>
+<div class="subhead">✅ Advantages</div><p>Compactly encodes all uncertainty information about a variable; Gaussian assumption enables closed-form solutions in many ML algorithms.</p>
+<div class="subhead">❌ Limitations</div><p>Real data may not fit any standard named distribution; wrong distributional assumptions bias model results.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>PMF (discrete, sums to 1) vs PDF (continuous, integrates to 1) — a key distinction tested frequently.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Treating PDF value p(x) as a probability (it can be &gt;1); forgetting normalization constraint.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>PMF: Σ=1. PDF: ∫=1.</li><li>Bernoulli → binary; Multinoulli → multi-class categorical.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define PMF and PDF.</li><li>(5M) Explain Bernoulli and Gaussian distribution with formula and use in ML.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-marginal">
+    <div class="topic-head">
+      <h3>3. Marginal Probability</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-marginal" onclick="cycleProgress('t-marginal')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-marginal" onclick="toggleBookmark('t-marginal')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Conceptually simple, tested as 2-mark definition + small numerical using a joint probability table.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">Given a joint distribution over a set of variables, the <b>marginal probability distribution</b> of a subset is obtained by summing (discrete) or integrating (continuous) over all possible values of the remaining variables. This is also called the <b>sum rule</b>.</div>
+<div class="subhead">🧠 Intuition</div><p>If you know the full joint probability table of two variables, "marginalizing out" one variable means adding along its rows/columns to get the distribution of the other variable alone, ignoring the first.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Discrete: P(X=x) = Σ_y P(X=x, Y=y) <br>Continuous: p(x) = ∫ p(x,y) dy</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Joint table P(X,Y):<br>
+P(X=0,Y=0)=0.1, P(X=0,Y=1)=0.2, P(X=1,Y=0)=0.3, P(X=1,Y=1)=0.4.<br>
+Marginal P(X=0) = 0.1+0.2 = 0.3. Marginal P(X=1) = 0.3+0.4 = 0.7.</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Given the joint distribution of (weather, whether-a-match-is-played), the marginal probability of "match played" is obtained by summing over all weather conditions.</p>
+<div class="subhead">✅ Advantages</div><p>Lets us reason about a single variable of interest, ignoring nuisance variables, without losing information encoded by the joint distribution.</p>
+<div class="subhead">❌ Limitations</div><p>Requires full knowledge of the joint distribution, which may be expensive/impossible to compute for many variables (curse of dimensionality).</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>Marginal probability (sum rule) vs Conditional probability (which additionally divides by a marginal, see next topic).</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Forgetting to sum over ALL values of the marginalized variable; confusing marginal with conditional probability.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Sum rule: P(x) = Σ_y P(x,y).</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define marginal probability.</li><li>(5M) Given a joint probability table, compute marginal probabilities.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-conditional">
+    <div class="topic-head">
+      <h3>4. Conditional Probability</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-conditional" onclick="cycleProgress('t-conditional')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-conditional" onclick="toggleBookmark('t-conditional')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Core prerequisite for Bayes’ Rule; frequently tested with numericals.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">The <b>conditional probability</b> of Y given X, written P(Y=y | X=x), is the probability that Y=y, given that we know X=x has occurred. Defined as: P(Y=y|X=x) = P(Y=y, X=x) / P(X=x), provided P(X=x) &gt; 0.</div>
+<div class="subhead">🧠 Intuition</div><p>Conditional probability "zooms in" on the world where X=x has already happened, and asks how likely Y=y is within that restricted world.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">P(y|x) = P(x,y) / P(x) &nbsp;&nbsp; (Product/Chain rule rearranged: P(x,y) = P(y|x)P(x))</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">P(X=1,Y=1)=0.4, P(X=1)=0.7 (from marginal example above). Then P(Y=1|X=1) = 0.4/0.7 ≈ 0.571.</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>P(disease | positive test result) — the probability a patient has a disease given they tested positive — is a conditional probability, central to medical ML classifiers and directly used via Bayes’ Rule.</p>
+<div class="subhead">✅ Advantages</div><p>Lets models incorporate evidence/observations to update beliefs — the basis of all supervised learning (P(label | features)).</p>
+<div class="subhead">❌ Limitations</div><p>Undefined when the conditioning event has probability zero; can be counter-intuitive (base rate fallacy) if marginal (prior) probabilities are ignored.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>Chain rule of probability generalizes conditional probability to many variables: P(x₁,...,xₙ) = P(x₁)·P(x₂|x₁)·P(x₃|x₁,x₂)·...</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Confusing P(A|B) with P(B|A) — these are generally NOT equal (this exact confusion motivates Bayes’ Rule).</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>P(y|x) = P(x,y)/P(x) — MEMORIZE.</li><li>Chain rule: P(x₁,...,xₙ) = ∏ᵢ P(xᵢ | x₁,...,xᵢ₋₁).</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define conditional probability.</li><li>(5M) State and prove the chain rule of probability.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-expectation">
+    <div class="topic-head">
+      <h3>5. Expectation</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-expectation" onclick="cycleProgress('t-expectation')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-expectation" onclick="toggleBookmark('t-expectation')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Building block for variance, bias-variance analysis, loss function definitions (expected loss/risk). Frequently examined.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">The <b>expectation</b> (expected value / mean) of a function f(x) with respect to a probability distribution P(x) is the average value f(x) takes, weighted by how likely each x is: <br>Discrete: E<sub>x~P</sub>[f(x)] = Σₓ P(x) f(x) &nbsp;&nbsp; Continuous: E<sub>x~p</sub>[f(x)] = ∫ p(x) f(x) dx</div>
+<div class="subhead">🧠 Intuition</div><p>Expectation is the "weighted average" or "center of mass" of a random quantity — if you repeated the random experiment infinitely and averaged the outcomes, you would get the expectation.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>Expectation is linear: E[αf(x)+βg(x)] = αE[f(x)]+βE[g(x)], regardless of whether f and g are independent — this property is used constantly to simplify derivations (e.g., bias-variance decomposition).</p>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Fair die: E[X] = Σ (1/6)·i for i=1..6 = (1+2+3+4+5+6)/6 = 3.5.</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>The expected loss (risk) R(θ) = E<sub>(x,y)~data</sub>[L(f(x;θ), y)] is what ML training tries to minimize (approximated using the empirical average over training data).</p>
+<div class="subhead">✅ Advantages</div><p>Single summary number capturing central tendency; linearity of expectation makes complex derivations tractable.</p>
+<div class="subhead">❌ Limitations</div><p>Does not capture spread/uncertainty (need variance too); can be misleading for skewed/multi-modal distributions.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Assuming E[f(X)] = f(E[X]) — false in general (true only for linear f); forgetting expectation is linear even for dependent variables.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>E[αX+β] = αE[X]+β.</li><li>E[X+Y] = E[X]+E[Y] always (even if dependent).</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define expectation.</li><li>(5M) State and prove linearity of expectation with example.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-var-cov">
+    <div class="topic-head">
+      <h3>6. Variance and Covariance</h3>
+      <div class="topic-controls">
+        <span class="badge vh">🔥 VERY HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-var-cov" onclick="cycleProgress('t-var-cov')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-var-cov" onclick="toggleBookmark('t-var-cov')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Extremely high-yield — direct numerical problems, derivations, and conceptual link to PCA (covariance matrix) and bias-variance tradeoff. Expect long-answer questions.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Variance</b> measures how much values of a random variable X spread out from its mean: Var(X) = E[(X−E[X])²]. <b>Covariance</b> measures how two variables change together: Cov(X,Y) = E[(X−E[X])(Y−E[Y])].</div>
+<div class="subhead">🧠 Intuition</div><p>Variance answers "how spread out is X?" — small variance means values cluster near the mean; large variance means values are widely dispersed. Covariance answers "do X and Y tend to move together?" — positive covariance means they increase together, negative means one increases as the other decreases, zero means no linear relationship.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>Standard deviation SD(X) = √Var(X) puts the spread measure back into the original units (variance is in squared units). The <b>correlation coefficient</b> ρ = Cov(X,Y)/(SD(X)SD(Y)) normalizes covariance to lie in [−1,1], making it scale-independent. For a vector of random variables, the <b>covariance matrix</b> Σ collects all pairwise covariances: Σ<sub>i,j</sub> = Cov(Xᵢ,Xⱼ); the diagonal holds variances.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Var(X) = E[(X−E[X])²] = E[X²] − (E[X])² <br>Cov(X,Y) = E[(X−E[X])(Y−E[Y])] = E[XY] − E[X]E[Y] <br>Cov(X,X) = Var(X) <br>Var(X+Y) = Var(X)+Var(Y)+2Cov(X,Y)</div>
+<div class="subhead">📐 Derivation</div>
+<div class="box formula">Derive Var(X) = E[X²]−(E[X])²:<br>
+Var(X) = E[(X−μ)²], where μ=E[X]<br>
+= E[X² − 2μX + μ²]<br>
+= E[X²] − 2μE[X] + μ² &nbsp;(by linearity of expectation)<br>
+= E[X²] − 2μ·μ + μ²  &nbsp;(since E[X]=μ)<br>
+= E[X²] − μ² = E[X²] − (E[X])² ∎ <br><br>
+Derive Var(X+Y) = Var(X)+Var(Y)+2Cov(X,Y):<br>
+Var(X+Y) = E[((X+Y)−E[X+Y])²] = E[((X−μₓ)+(Y−μᵧ))²]<br>
+= E[(X−μₓ)²] + E[(Y−μᵧ)²] + 2E[(X−μₓ)(Y−μᵧ)]<br>
+= Var(X) + Var(Y) + 2Cov(X,Y) ∎</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">X takes values 2,4,6 each with prob 1/3. E[X]=4. E[X²]=(4+16+36)/3=56/3≈18.67.<br>
+Var(X) = 18.67 − 16 = 2.67.<br>
+If Y = 2X (perfectly correlated), Cov(X,Y) = E[XY]−E[X]E[Y]. Since Y=2X, Cov(X,Y)=2Var(X)=5.33 (maximal positive covariance).</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>The covariance matrix of features is exactly what PCA eigen-decomposes to find principal components; in the bias-variance tradeoff, the variance term measures how much model predictions fluctuate across different training sets.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(40,55)"><circle cx="0" cy="0" r="4" fill="#2f57a3"/><circle cx="8" cy="4" r="4" fill="#2f57a3"/><circle cx="-6" cy="-3" r="4" fill="#2f57a3"/><circle cx="10" cy="9" r="4" fill="#2f57a3"/><circle cx="-10" cy="-8" r="4" fill="#2f57a3"/>
+<text x="-30" y="35" font-size="9">Positive covariance</text></g>
+<g transform="translate(180,55)"><circle cx="0" cy="0" r="4" fill="#c0392b"/><circle cx="8" cy="-4" r="4" fill="#c0392b"/><circle cx="-6" cy="3" r="4" fill="#c0392b"/><circle cx="10" cy="-9" r="4" fill="#c0392b"/><circle cx="-10" cy="8" r="4" fill="#c0392b"/>
+<text x="150" y="35" font-size="9">Negative covariance</text></g>
+</svg>
+<div class="subhead">✅ Advantages</div><p>Variance quantifies uncertainty/reliability of predictions; covariance matrix captures full linear relationship structure among many variables at once.</p>
+<div class="subhead">❌ Limitations</div><p>Only captures LINEAR relationships (Cov=0 does not imply independence, only no linear relationship); sensitive to outliers; variance/covariance scale with units (correlation is preferred for comparability).</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div>
+<table><tr><th>Measure</th><th>Range</th><th>Meaning</th></tr>
+<tr><td>Variance</td><td>[0,∞)</td><td>Spread of single variable</td></tr>
+<tr><td>Covariance</td><td>(−∞,∞)</td><td>Joint linear variability of two variables</td></tr>
+<tr><td>Correlation</td><td>[−1,1]</td><td>Normalized, scale-free covariance</td></tr></table>
+<div class="subhead">⚠️ Common Mistakes</div><p>Assuming Cov(X,Y)=0 implies X,Y independent (false — only true for jointly Gaussian variables in general); forgetting the factor of 2 in Var(X+Y) expansion; sign errors when expanding squares.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Var(X)=E[X²]−(E[X])² — MEMORIZE.</li><li>Cov(X,Y)=E[XY]−E[X]E[Y] — MEMORIZE.</li><li>Covariance matrix is symmetric, diagonal = variances.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul>
+<li>(2M) Define variance and covariance.</li>
+<li>(2M) What does zero covariance imply (and not imply)?</li>
+<li>(5M) Derive Var(X)=E[X²]−(E[X])².</li>
+<li>(10M) Derive Var(X+Y) in terms of Var(X), Var(Y), Cov(X,Y) and solve a numerical example.</li>
+<li>(10M) Explain the covariance matrix and its role in PCA.</li>
+</ul>
+
+  </div>
+
+  <div class="topic" id="t-bayes">
+    <div class="topic-head">
+      <h3>7. Bayes’ Rule</h3>
+      <div class="topic-controls">
+        <span class="badge vh">🔥 VERY HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-bayes" onclick="cycleProgress('t-bayes')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-bayes" onclick="toggleBookmark('t-bayes')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>One of the single most-examined formulas in the entire syllabus — expect a derivation + numerical almost every exam (medical test/spam-filter style problems).</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Bayes’ Rule (Bayes’ Theorem)</b> lets us reverse the direction of conditioning — computing P(Y|X) from P(X|Y): <br><b>P(y|x) = [P(x|y) · P(y)] / P(x)</b></div>
+<div class="subhead">🧠 Intuition</div><p>Bayes’ Rule updates our belief about a hypothesis Y after observing evidence X. P(y) is the <b>prior</b> belief before seeing data; P(x|y) is the <b>likelihood</b> of the evidence under that hypothesis; P(y|x) is the <b>posterior</b> — updated belief after seeing evidence.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>The denominator P(x) acts as a normalizing constant and can be expanded via marginalization: P(x) = Σ_y P(x|y)P(y) (sum over all possible hypotheses). This ensures the posterior sums to 1 over all y.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">P(y|x) = P(x|y)P(y) / P(x), where P(x) = Σ_y′ P(x|y′)P(y′)<br>Posterior ∝ Likelihood × Prior</div>
+<div class="subhead">📐 Derivation</div>
+<div class="box formula">From the definition of conditional probability (both directions):<br>
+P(x,y) = P(x|y)·P(y) &nbsp;&nbsp;(1)<br>
+P(x,y) = P(y|x)·P(x) &nbsp;&nbsp;(2)<br>
+Since both equal P(x,y), set (1) = (2): P(y|x)·P(x) = P(x|y)·P(y)<br>
+Divide both sides by P(x): <b>P(y|x) = P(x|y)P(y) / P(x)</b> ∎</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Medical test problem: Disease prevalence P(D)=0.01. Test sensitivity P(+|D)=0.99. False positive rate P(+|¬D)=0.05.<br>
+P(+) = P(+|D)P(D)+P(+|¬D)P(¬D) = 0.99×0.01 + 0.05×0.99 = 0.0099+0.0495 = 0.0594.<br>
+P(D|+) = P(+|D)P(D)/P(+) = 0.0099/0.0594 ≈ 0.1667 (only ~16.7%! — classic counter-intuitive base-rate result).</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Naive Bayes classifier computes P(class|features) using Bayes’ Rule with a "naive" conditional-independence assumption on features; spam filters classify P(spam|words); Bayesian statistics (next chapter) makes Bayes’ Rule the central engine for parameter estimation.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg">
+<g font-size="10" fill="#333">
+<rect x="10" y="10" width="90" height="30" fill="#eef3ff" stroke="#2f57a3"/><text x="18" y="30">Prior P(y)</text>
+<text x="105" y="30">+</text>
+<rect x="115" y="10" width="110" height="30" fill="#fff8e6" stroke="#e8c766"/><text x="122" y="30">Likelihood P(x|y)</text>
+<text x="115" y="55">↓ (normalize by P(x))</text>
+<rect x="60" y="70" width="140" height="30" fill="#eefaf5" stroke="#0e8a6d"/><text x="90" y="90">Posterior P(y|x)</text>
+</g>
+</svg>
+<div class="subhead">⚙️ Algorithm / Procedure</div><p>1. Identify prior P(y) for each hypothesis. 2. Identify likelihood P(x|y) for the observed evidence under each hypothesis. 3. Compute marginal P(x)=Σ_y P(x|y)P(y). 4. Compute posterior P(y|x) for the hypothesis of interest.</p>
+<div class="subhead">✅ Advantages</div><p>Provides principled way to update beliefs with new evidence; foundation of Bayesian statistics and Naive Bayes classifiers; handles uncertainty rigorously.</p>
+<div class="subhead">❌ Limitations</div><p>Requires knowing/estimating the prior, which can be subjective or unavailable; computing the marginal P(x) can be intractable for complex/high-dimensional problems (motivates approximate inference methods).</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>Bayes’ Rule (reverses conditioning) vs Chain Rule (decomposes joint into a product of conditionals) — Bayes’ Rule is actually derived from two applications of the chain rule/conditional-probability definition.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Forgetting to compute/expand the denominator P(x) via marginalization; confusing P(x|y) with P(y|x) (this exact confusion is called the "prosecutor\'s fallacy"); ignoring the prior (base rate) in intuitive reasoning.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>P(y|x)=P(x|y)P(y)/P(x) — MEMORIZE with full derivation.</li><li>Posterior ∝ Likelihood × Prior.</li><li>Always double-check by expanding P(x) via total probability/marginalization.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul>
+<li>(2M) State Bayes’ theorem.</li>
+<li>(5M) Derive Bayes’ Rule from the definition of conditional probability.</li>
+<li>(10M) Solve a numerical Bayes’ theorem problem (e.g., medical diagnosis/spam filter) showing full working.</li>
+<li>(10M) Explain the role of Bayes’ Rule in Naive Bayes classification / Bayesian statistics.</li>
+</ul>
+
+  </div>
+
+  <div class="topic" id="t-info-theory">
+    <div class="topic-head">
+      <h3>8. Information Theory</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-info-theory" onclick="cycleProgress('t-info-theory')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-info-theory" onclick="toggleBookmark('t-info-theory')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Very important for understanding loss functions (cross-entropy) used throughout deep learning; frequently tested with entropy/cross-entropy/KL divergence formula-based questions.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Information theory</b> quantifies how much "information"/"surprise" is associated with observing an event. <b>Self-information</b> of an event x: I(x) = −log P(x). <b>Entropy</b> H(X) is the expected self-information of a distribution: H(X) = −Σₓ P(x) log P(x).</div>
+<div class="subhead">🧠 Intuition</div><p>Rare/unlikely events carry more information when they occur (learning that a rare event happened tells you a lot); certain events (P=1) carry zero information. Entropy measures the average uncertainty/"surprise" inherent in a whole distribution — a fair coin (maximum uncertainty) has higher entropy than a biased coin.</p>
+<div class="subhead">📖 Detailed Explanation</div><p><b>Cross-Entropy</b> H(P,Q) = −Σₓ P(x) log Q(x) measures the average number of bits needed to encode data from true distribution P using a code optimized for an estimated/model distribution Q — this is exactly the standard loss function for classification in deep learning (comparing true labels P to predicted probabilities Q). <b>KL Divergence</b> D<sub>KL</sub>(P‖Q) = Σₓ P(x) log[P(x)/Q(x)] = H(P,Q) − H(P) measures how different Q is from P (always ≥0, equals 0 only when P=Q; NOT symmetric, so it is a "divergence" not a true distance).</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Self-information: I(x) = −log P(x) <br>Entropy: H(X) = −Σₓ P(x) log P(x) = E<sub>x~P</sub>[−log P(x)] <br>Cross-Entropy: H(P,Q) = −Σₓ P(x) log Q(x) <br>KL Divergence: D<sub>KL</sub>(P‖Q) = Σₓ P(x) log(P(x)/Q(x)) = H(P,Q) − H(P)</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Fair coin: P(H)=P(T)=0.5. H(X) = −(0.5log₂0.5 + 0.5log₂0.5) = −(0.5×−1 + 0.5×−1) = 1 bit (maximum entropy for binary variable).<br>
+Biased coin: P(H)=0.9,P(T)=0.1. H(X)= −(0.9log₂0.9+0.1log₂0.1) ≈ −(0.9×−0.152+0.1×−3.32) ≈ 0.469 bits (less uncertain).</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Cross-entropy loss is the standard loss function for classification neural networks (comparing one-hot true label distribution to predicted softmax distribution); KL divergence is used in variational autoencoders (VAEs) and in comparing/regularizing probability distributions; decision tree splitting criteria (information gain) are based on entropy reduction.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg">
+<path d="M20,95 Q130,5 240,95" fill="none" stroke="#2f57a3" stroke-width="2"/>
+<line x1="10" y1="95" x2="250" y2="95" stroke="#999"/>
+<text x="115" y="20" font-size="10">H(X) max at p=0.5</text>
+<text x="100" y="108" font-size="9">Entropy vs P(Heads) for a coin</text>
+</svg>
+<div class="subhead">✅ Advantages</div><p>Provides a rigorous, unit-consistent way (bits/nats) to measure uncertainty and compare distributions; cross-entropy loss gives well-behaved gradients for classification training.</p>
+<div class="subhead">❌ Limitations</div><p>Entropy/KL divergence require known probability distributions, which must be estimated from finite data; KL divergence is asymmetric so cannot be used as a true "distance metric".</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div>
+<table><tr><th>Quantity</th><th>Formula</th><th>Meaning</th></tr>
+<tr><td>Entropy H(P)</td><td>−ΣP log P</td><td>Uncertainty in true distribution alone</td></tr>
+<tr><td>Cross-Entropy H(P,Q)</td><td>−ΣP log Q</td><td>Cost of using Q to encode data from P</td></tr>
+<tr><td>KL Divergence</td><td>H(P,Q)−H(P)</td><td>Extra cost/difference of using Q instead of P</td></tr></table>
+<div class="subhead">⚠️ Common Mistakes</div><p>Forgetting the negative sign in entropy/cross-entropy formulas; confusing KL(P‖Q) with KL(Q‖P) — order matters since KL divergence is not symmetric; using natural log vs log base 2 inconsistently (changes units from nats to bits).</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>H(X) = −Σ P(x)log P(x) — MEMORIZE.</li><li>Cross-entropy = entropy + KL divergence: H(P,Q) = H(P) + D<sub>KL</sub>(P‖Q).</li><li>KL divergence ≥ 0 always; = 0 iff P=Q.</li><li>Uniform distribution has MAXIMUM entropy among all distributions on a fixed support.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul>
+<li>(2M) Define entropy.</li>
+<li>(2M) Define KL divergence.</li>
+<li>(5M) Explain cross-entropy and its use as a loss function in deep learning.</li>
+<li>(10M) Derive the relationship between entropy, cross-entropy, and KL divergence; compute entropy for a numerical example.</li>
+</ul>
+
+  </div>
+<div class="chapter-header" id="ch3"><h2>Chapter 3: Numerical Computation</h2></div>
+  <div class="topic" id="t-overflow-underflow">
+    <div class="topic-head">
+      <h3>1. Overflow and Underflow</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-overflow-underflow" onclick="cycleProgress('t-overflow-underflow')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-overflow-underflow" onclick="toggleBookmark('t-overflow-underflow')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Conceptual + practical topic; commonly a 2-5 mark question about why softmax/log-sum-exp tricks are needed.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Underflow</b> occurs when numbers very close to zero are rounded to zero by finite-precision computer arithmetic. <b>Overflow</b> occurs when numbers with very large magnitude are approximated as +∞ or −∞. Both cause loss of numerical accuracy.</div>
+<div class="subhead">🧠 Intuition</div><p>Computers cannot store real numbers with infinite precision — they use floating-point representations with a limited number of bits. Extremely small or large values "fall off the edge" of what can be represented, causing errors that can silently corrupt computations (e.g., dividing by an underflowed zero).</p>
+<div class="subhead">📖 Detailed Explanation</div><p>A classic example is the <b>softmax function</b> softmax(x)ᵢ = exp(xᵢ)/Σⱼexp(xⱼ). If any xᵢ is very large, exp(xᵢ) overflows to infinity; if all xᵢ are very negative, exp(xᵢ) underflows to zero for all i, causing a 0/0 division. The standard fix is to subtract the maximum value: softmax(x)ᵢ = exp(xᵢ−max(x)) / Σⱼexp(xⱼ−max(x)) — this keeps the largest exponent at 0 (exp(0)=1) and all others ≤0, avoiding overflow while preserving the mathematically correct result.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Stable softmax: softmax(x)ᵢ = exp(xᵢ − max(x)) / Σⱼ exp(xⱼ − max(x)) <br>Log-sum-exp trick: log Σᵢexp(xᵢ) = max(x) + log Σᵢ exp(xᵢ−max(x))</div>
+<div class="subhead">💡 Simple Example</div><p>x = [1000, 1000]. Naive exp(1000) = overflow (inf). Stable version: subtract max=1000 → exp(0)+exp(0)=2, softmax=[0.5,0.5] — correct result recovered.</p>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Computing log-likelihoods for many small probabilities multiplied together (e.g., in Naive Bayes or HMMs) underflows quickly; practitioners work in log-space and use log-sum-exp for numerical stability.</p>
+<div class="subhead">✅ Advantages</div><p>Stabilization techniques (max-subtraction, log-space computation) allow deep networks to be trained reliably without numerical corruption.</p>
+<div class="subhead">❌ Limitations</div><p>Adds slight extra computation; must be applied carefully and consistently throughout a pipeline (loss functions, activation functions) or errors can resurface elsewhere.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Implementing softmax/log-likelihood without numerical stabilization; forgetting that log(0) = −∞ causes NaN propagation.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Stable softmax subtracts max(x) before exponentiating — MEMORIZE.</li><li>Underflow → treated as 0; Overflow → treated as ±∞.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) Define overflow and underflow.</li><li>(5M) Explain the numerically stable softmax function and why it is needed.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-gradient-opt">
+    <div class="topic-head">
+      <h3>2. Gradient-Based Optimization</h3>
+      <div class="topic-controls">
+        <span class="badge vh">🔥 VERY HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-gradient-opt" onclick="cycleProgress('t-gradient-opt')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-gradient-opt" onclick="toggleBookmark('t-gradient-opt')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Extremely important — foundation of ALL neural network training; expect derivation + numerical + algorithm questions.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Gradient-based optimization</b> minimizes (or maximizes) an objective/cost function f(x) by iteratively moving x in the direction that most rapidly decreases f, which is the negative gradient direction −∇ₓf(x).</div>
+<div class="subhead">🧠 Intuition</div><p>Imagine standing on a hilly landscape (the cost surface) in fog, only able to feel the local slope under your feet. The gradient tells you the steepest uphill direction; walking in the OPPOSITE direction (steepest descent) takes you toward a valley (minimum) fastest, step by step.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>The gradient ∇ₓf(x) is the vector of partial derivatives [∂f/∂x₁, ..., ∂f/∂xₙ]. At any point, it points in the direction of steepest increase of f; hence its negative points toward steepest decrease. The learning rate (step size) ε controls how large each step is: too small → slow convergence; too large → overshooting/divergence. A <b>critical point</b> is where ∇f(x)=0 — could be a minimum, maximum, or saddle point (checked using the second derivative / Hessian).</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Update rule (Gradient Descent): x ← x − ε∇ₓf(x) <br>ε = learning rate (step size)</div>
+<div class="subhead">📐 Derivation</div>
+<div class="box formula">Using first-order Taylor expansion: f(x+Δx) ≈ f(x) + Δxᵀ∇f(x).<br>
+We want to choose Δx (with fixed small magnitude ‖Δx‖) that MINIMIZES this approximation.<br>
+Δxᵀ∇f(x) is minimized (most negative) when Δx points exactly opposite to ∇f(x), i.e. Δx = −ε∇f(x) for some small ε&gt;0 (by Cauchy-Schwarz inequality, the dot product is most negative when vectors are anti-parallel).<br>
+Substituting: x_new = x − ε∇f(x) — this is the gradient descent update rule.</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Minimize f(x)=x². ∇f(x)=2x. Start x₀=4, ε=0.1.<br>
+x₁ = 4 − 0.1(8) = 3.2. x₂ = 3.2 − 0.1(6.4) = 2.56. x₃=2.56−0.1(5.12)=2.048 ... converging toward the true minimum x=0.</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Training a neural network updates all weights via gradient descent (or its stochastic variant, SGD) on the loss function computed via backpropagation.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+<path d="M20,110 Q130,10 240,110" fill="none" stroke="#2f57a3" stroke-width="2"/>
+<circle cx="200" cy="90" r="4" fill="#c0392b"/><circle cx="160" cy="45" r="4" fill="#c0392b"/><circle cx="130" cy="18" r="4" fill="#c0392b"/>
+<text x="140" y="125" font-size="10">Steps descending toward minimum</text>
+</svg>
+<div class="subhead">⚙️ Algorithm / Procedure</div><p>1. Initialize x (parameters). 2. Compute gradient ∇f(x). 3. Update x ← x−ε∇f(x). 4. Repeat until convergence (gradient≈0 or max iterations reached).</p>
+<div class="subhead">📝 Pseudocode</div>
+<pre>x = initialize()
+while not converged:
+    grad = compute_gradient(f, x)
+    x = x - epsilon * grad
+return x</pre>
+<div class="subhead">✅ Advantages</div><p>Simple, general-purpose, scales to millions of parameters (with stochastic variants); only needs first-order derivative information.</p>
+<div class="subhead">❌ Limitations</div><p>Can get stuck in local minima/saddle points for non-convex functions; sensitive to learning rate choice; slow near flat regions (vanishing gradient); does not use curvature information (unlike second-order methods).</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>First-order (gradient descent, only uses ∇f) vs Second-order methods (e.g., Newton\u2019s method, uses Hessian ∇²f for faster but costlier convergence) — covered in Ch.5 Optimization for Training Deep Models.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Choosing too large a learning rate (divergence/oscillation); forgetting the negative sign in the update rule; confusing gradient (vector) with derivative (scalar, 1-D case only).</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>x←x−ε∇f(x) — MEMORIZE.</li><li>∇f(x)=0 at critical points (minima, maxima, saddle points).</li><li>Direction of steepest descent = −∇f(x).</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul>
+<li>(2M) Define gradient descent.</li>
+<li>(2M) What is the role of the learning rate?</li>
+<li>(5M) Derive the gradient descent update rule from the first-order Taylor expansion.</li>
+<li>(10M) Explain gradient-based optimization with a numerical example and discuss the effect of learning rate (too small vs too large) with diagrams.</li>
+</ul>
+
+  </div>
+
+  <div class="topic" id="t-constrained-opt">
+    <div class="topic-head">
+      <h3>3. Constrained Optimization</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-constrained-opt" onclick="cycleProgress('t-constrained-opt')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-constrained-opt" onclick="toggleBookmark('t-constrained-opt')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Important conceptually and mathematically — connects directly to PCA derivation and regularization (Ch.4); Lagrange multipliers and KKT conditions are common exam topics.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Constrained optimization</b> seeks to minimize (or maximize) an objective function f(x) subject to equality constraints g(x)=0 and/or inequality constraints h(x)≤0, restricting the feasible search space for x.</div>
+<div class="subhead">🧠 Intuition</div><p>Instead of searching the whole space for the best x, constrained optimization only considers points satisfying certain rules — e.g., "find the best solution, but the weight vector must have unit length" (exactly the PCA constraint).</p>
+<div class="subhead">📖 Detailed Explanation</div><p>The classical technique for EQUALITY constraints is the method of <b>Lagrange multipliers</b>: form the Lagrangian L(x,λ) = f(x) + λg(x), and solve ∇ₓL=0 and ∇_λL=0 simultaneously. For INEQUALITY constraints, the <b>Karush-Kuhn-Tucker (KKT) conditions</b> generalize this — they require stationarity, primal feasibility (h(x)≤0), dual feasibility (μ≥0), and complementary slackness (μh(x)=0).</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Lagrangian (equality constraint): L(x,λ) = f(x) + λ g(x) <br>Stationarity: ∇ₓL = ∇f(x) + λ∇g(x) = 0 <br>KKT (inequality h(x)≤0): stationarity, h(x)≤0, μ≥0, μh(x)=0</div>
+<div class="subhead">📐 Derivation</div><p>DERIVATION NOT REQUIRED for full KKT theory — but be ready to reproduce the PCA-style derivation (maximize wᵀΣw subject to wᵀw=1 using Lagrange multipliers) shown in Chapter 1\u2019s PCA topic, which is the most likely numerical/derivation application.</p>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Maximize f(x,y)=xy subject to x+y=10.<br>
+L = xy + λ(x+y−10). ∂L/∂x = y+λ=0, ∂L/∂y = x+λ=0 ⟹ x=y. With x+y=10 ⟹ x=y=5. Max value = 25.</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>PCA\u2019s variance maximization subject to unit-norm constraint; SVM\u2019s margin maximization subject to correct-classification constraints (uses KKT conditions); L1/L2 regularization can be viewed as constrained optimization (norm penalty ≤ budget) — covered in Ch.4.</p>
+<div class="subhead">✅ Advantages</div><p>Allows encoding of domain knowledge/restrictions directly into the optimization problem; Lagrangian framework converts constrained problems into unconstrained ones (easier to solve with standard calculus).</p>
+<div class="subhead">❌ Limitations</div><p>KKT conditions are necessary but not always sufficient for non-convex problems; can be computationally complex for many constraints.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>Equality-constrained (Lagrange multipliers only) vs inequality-constrained (needs full KKT conditions with additional non-negativity and complementary slackness conditions).</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Forgetting to include the constraint equation itself as one of the equations to solve (∇_λL=0 just restates g(x)=0); sign errors in the Lagrangian.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>L(x,λ)=f(x)+λg(x) — MEMORIZE for equality constraints.</li><li>KKT extends this to inequality constraints with complementary slackness.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul><li>(2M) What is constrained optimization?</li><li>(5M) Explain the method of Lagrange multipliers with an example.</li><li>(10M) State and explain the KKT conditions with an example application in ML (e.g., PCA or SVM).</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-least-squares">
+    <div class="topic-head">
+      <h3>4. Linear Least Squares</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-least-squares" onclick="cycleProgress('t-least-squares')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-least-squares" onclick="toggleBookmark('t-least-squares')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Important — directly testable derivation connecting linear algebra + calculus + optimization; classic 10-mark question.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Linear least squares</b> finds the parameter vector x that minimizes the squared error between a linear model Ax and target vector b: minimize f(x) = ‖Ax−b‖₂².</div>
+<div class="subhead">🧠 Intuition</div><p>When an exact solution to Ax=b does not exist (an over-determined system with more equations than unknowns), least squares finds the "closest possible" x — the one minimizing the total squared distance between predictions Ax and actual targets b. This is exactly linear regression\u2019s fitting criterion.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>The objective f(x)=‖Ax−b‖₂² = (Ax−b)ᵀ(Ax−b) is a smooth, convex quadratic function of x, guaranteeing a unique global minimum (when AᵀA is invertible), found simply by setting its gradient to zero.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Objective: f(x) = ‖Ax − b‖₂² <br>Normal Equation: AᵀAx = Aᵀb <br>Closed-form solution: x* = (AᵀA)⁻¹ Aᵀb</div>
+<div class="subhead">📐 Derivation</div>
+<div class="box formula">f(x) = (Ax−b)ᵀ(Ax−b) = xᵀAᵀAx − 2xᵀAᵀb + bᵀb<br>
+∇ₓf(x) = 2AᵀAx − 2Aᵀb &nbsp;(using matrix calculus identities: ∇ₓ(xᵀMx)=2Mx for symmetric M; ∇ₓ(xᵀc)=c)<br>
+Set gradient to zero: 2AᵀAx − 2Aᵀb = 0 ⟹ AᵀAx = Aᵀb &nbsp;(the Normal Equation)<br>
+If AᵀA is invertible: <b>x* = (AᵀA)⁻¹Aᵀb</b> ∎</div>
+<div class="subhead">💡 Simple Example</div>
+<div class="box example">Fit y=mx (no intercept) to points (1,2),(2,3),(3,5). A=[[1],[2],[3]], b=[2,3,5]ᵀ.<br>
+AᵀA = 1+4+9=14. Aᵀb = 1(2)+2(3)+3(5)=2+6+15=23.<br>
+x* = 23/14 ≈ 1.643 (best-fit slope m).</div>
+<div class="subhead">🎯 Real-World/ML Example</div><p>Linear Regression is exactly linear least squares: fitting a line/hyperplane to data by minimizing sum of squared residuals; used as a baseline model and building block for more complex regression techniques.</p>
+<div class="subhead">🖼️ Diagram</div>
+<svg class="diagram" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+<line x1="20" y1="110" x2="240" y2="110" stroke="#999"/><line x1="20" y1="110" x2="20" y2="10" stroke="#999"/>
+<line x1="30" y1="100" x2="220" y2="30" stroke="#2f57a3" stroke-width="2"/>
+<circle cx="50" cy="85" r="4" fill="#c0392b"/><line x1="50" y1="85" x2="50" y2="93" stroke="#c0392b" stroke-dasharray="2,2"/>
+<circle cx="110" cy="55" r="4" fill="#c0392b"/><line x1="110" y1="55" x2="110" y2="66" stroke="#c0392b" stroke-dasharray="2,2"/>
+<circle cx="180" cy="45" r="4" fill="#c0392b"/><line x1="180" y1="45" x2="180" y2="45" stroke="#c0392b" stroke-dasharray="2,2"/>
+<text x="60" y="125" font-size="9">Fitted line minimizes sum of squared vertical residuals</text>
+</svg>
+<div class="subhead">⚙️ Algorithm / Procedure</div><p>1. Form design matrix A and target vector b. 2. Compute AᵀA and Aᵀb. 3. Solve the normal equation AᵀAx=Aᵀb (via matrix inverse or numerically stable methods like QR/SVD decomposition). 4. Output x* as the least-squares solution.</p>
+<div class="subhead">📝 Pseudocode</div>
+<pre>ATA = A.T @ A
+ATb = A.T @ b
+x_star = solve(ATA, ATb)   # or inv(ATA) @ ATb
+return x_star</pre>
+<div class="subhead">✅ Advantages</div><p>Closed-form solution (no iterative optimization needed for small/medium problems); convex objective guarantees global optimum; simple to implement and interpret.</p>
+<div class="subhead">❌ Limitations</div><p>Requires AᵀA to be invertible (fails if features are linearly dependent/collinear — needs regularization, i.e., Ridge Regression); computing matrix inverse is expensive (O(n³)) for large feature dimension; sensitive to outliers (squared error penalizes large errors heavily).</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>Ordinary Least Squares (closed-form, exact) vs Gradient-Based Optimization (iterative, scales better to huge datasets/parameters, used when closed-form is infeasible).</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Forgetting the factor of 2 when differentiating the squared norm; attempting to invert a singular/non-invertible AᵀA without regularization; sign errors in the normal equation.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Normal equation: AᵀAx=Aᵀb — MEMORIZE.</li><li>x*=(AᵀA)⁻¹Aᵀb — closed-form solution.</li><li>This is the mathematical foundation of Linear Regression.</li></ul>
+<div class="subhead">🎓 Exam-Oriented Questions</div><ul>
+<li>(2M) Define linear least squares.</li>
+<li>(5M) Derive the normal equation for linear least squares.</li>
+<li>(10M) Derive the closed-form solution x*=(AᵀA)⁻¹Aᵀb step-by-step and solve a numerical example.</li>
+</ul>
+
+  </div>
+<div class="revision-box" id="unit1-revision"><h2>📚 UNIT 1 — Revision Summary</h2>
+<div class="subhead">🔥 MUST STUDY</div>
+<ul class="priority-list"><li>🔥 Eigen Decomposition</li><li>🔥 Singular Value Decomposition (SVD)</li><li>🔥 Principal Component Analysis (PCA)</li><li>🔥 Variance and Covariance</li><li>🔥 Bayes' Rule</li><li>🔥 Gradient-Based Optimization</li></ul>
+<div class="subhead">🟠 HIGH PRIORITY</div>
+<ul class="priority-list"><li>🟠 Matrices and Tensors</li><li>🟠 Matrix Operations</li><li>🟠 Norms</li><li>🟠 Probability Distributions</li><li>🟠 Conditional Probability</li><li>🟠 Expectation</li><li>🟠 Information Theory</li><li>🟠 Constrained Optimization</li><li>🟠 Linear Least Squares</li></ul>
+<div class="subhead">🟡 MODERATE PRIORITY</div>
+<ul class="priority-list"><li>🟡 Vectors</li><li>🟡 Types of Matrices</li><li>🟡 Random Variables</li><li>🟡 Marginal Probability</li><li>🟡 Overflow and Underflow</li></ul>
+<div class="subhead">🟢 LOW PRIORITY</div>
+<ul class="priority-list"><li>🟢 Scalars</li></ul>
+
+<div class="subhead">🔢 Important Formulas</div>
+<div class="box formula">‖x‖₂² = xᵀx &nbsp;|&nbsp; Av=λv &nbsp;|&nbsp; A=VΛV⁻¹ (or QΛQᵀ if symmetric) &nbsp;|&nbsp; A=UΣVᵀ (SVD) <br>
+Var(X)=E[X²]−(E[X])² &nbsp;|&nbsp; Cov(X,Y)=E[XY]−E[X]E[Y] &nbsp;|&nbsp; P(y|x)=P(x|y)P(y)/P(x) <br>
+H(X)=−ΣP(x)log P(x) &nbsp;|&nbsp; x←x−ε∇f(x) &nbsp;|&nbsp; x*=(AᵀA)⁻¹Aᵀb</div>
+
+<div class="subhead">📐 Important Derivations</div>
+<ul><li>Eigen decomposition from Av=λv → det(A−λI)=0</li><li>SVD from eigen decomposition of AᵀA</li><li>PCA variance maximization via Lagrange multipliers → Σw=λw</li><li>Var(X+Y)=Var(X)+Var(Y)+2Cov(X,Y)</li><li>Bayes' Rule from conditional probability definition</li><li>Gradient descent update from Taylor expansion</li><li>Normal equation for Linear Least Squares</li></ul>
+
+<div class="subhead">🖼️ Important Diagrams</div>
+<ul><li>Vector as arrow in 2D space</li><li>Scalar→Vector→Matrix→Tensor progression</li><li>L1 (diamond) vs L2 (circle) norm balls</li><li>Eigenvector direction preservation (Av ∥ v)</li><li>SVD: rotate-scale-rotate (unit circle → ellipse)</li><li>PCA: PC1/PC2 axes on scattered data</li><li>Gaussian bell curve</li><li>Gradient descent steps on a bowl-shaped curve</li><li>Least squares fitted line with residuals</li></ul>
+
+<div class="subhead">🔄 Important Comparisons</div>
+<table><tr><th>Comparison</th><th>Key Difference</th></tr>
+<tr><td>Eigen Decomposition vs SVD</td><td>Eigen: square matrices only, one basis. SVD: any matrix, two bases (U,V)</td></tr>
+<tr><td>L1 vs L2 norm</td><td>L1→sparsity; L2→shrinkage, smooth, unique minimum</td></tr>
+<tr><td>PMF vs PDF</td><td>PMF sums to 1 (discrete); PDF integrates to 1 (continuous)</td></tr>
+<tr><td>Marginal vs Conditional Probability</td><td>Marginal sums out a variable; Conditional restricts to a sub-world and normalizes</td></tr>
+<tr><td>Entropy vs Cross-Entropy vs KL Divergence</td><td>H(P) uncertainty of P alone; H(P,Q) cost of using Q for P; KL = difference between them</td></tr>
+</table>
+
+<div class="subhead">🧮 Numerical Topics to Practice</div>
+<ul><li>Eigenvalues/eigenvectors of 2×2 matrices</li><li>Computing L1, L2, L∞ norms of a vector</li><li>Bayes' theorem numericals (medical test style)</li><li>Variance/covariance calculation from data</li><li>Gradient descent iterations by hand</li><li>Linear least squares normal equation solving</li></ul>
+
+<div class="subhead">❓ Expected 2-Mark Questions</div>
+<ul><li>Define scalar, vector, matrix, tensor.</li><li>Define eigenvalue and eigenvector.</li><li>Define SVD.</li><li>Define PCA.</li><li>Define variance and covariance.</li><li>State Bayes' theorem.</li><li>Define entropy.</li><li>Define gradient descent.</li><li>Define overflow and underflow.</li><li>Define linear least squares.</li></ul>
+
+<div class="subhead">📝 Expected 5-Mark Questions</div>
+<ul><li>Explain types of matrices with examples.</li><li>Compute L1/L2/L∞ norms for a given vector.</li><li>Find eigenvalues/eigenvectors of a 2×2 matrix.</li><li>Derive Bayes' Rule from conditional probability.</li><li>Explain PCA algorithm steps.</li><li>Derive Var(X)=E[X²]−(E[X])².</li><li>Explain cross-entropy as a loss function.</li><li>Explain Lagrange multipliers with example.</li></ul>
+
+<div class="subhead">📚 Expected 10/15-Mark Questions</div>
+<ul><li>Derive eigen decomposition and explain geometric meaning; solve numerical.</li><li>Derive SVD and compare with eigen decomposition.</li><li>Derive PCA using Lagrange multipliers; explain algorithm and applications.</li><li>Derive Var(X+Y) and solve numerical covariance problem.</li><li>Solve a full Bayes' theorem numerical problem (medical/spam).</li><li>Explain gradient descent with derivation, numerical, and learning-rate discussion.</li><li>Derive linear least squares normal equation and closed-form solution.</li><li>Explain KKT conditions with an ML application.</li></ul>
+
+<div class="subhead">⚡ One-Page Rapid Revision</div>
+<p>Linear Algebra gives us the language (scalars→vectors→matrices→tensors) and tools (norms, eigen decomposition, SVD) to represent and manipulate data; PCA applies eigen decomposition to reduce dimensionality by keeping high-variance directions. Probability gives us a language for uncertainty (random variables, distributions), tools to combine/reason about it (marginal, conditional, Bayes' Rule), and information theory to measure it (entropy, cross-entropy, KL divergence — directly used as deep learning loss functions). Numerical Computation addresses practical computer-arithmetic issues (overflow/underflow) and the optimization machinery (gradient descent, constrained optimization, least squares) used to actually train models.</p>
+</div>
+<!-- CONTENT_INSERT_POINT -->
+
+  </div>
+</div>
+
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ===================== THEME ===================== */
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('dl_theme', t);
+}
+(function(){
+  var saved = localStorage.getItem('dl_theme') || 'light';
+  applyTheme(saved);
+})();
+function toggleTheme(){
+  var cur = document.documentElement.getAttribute('data-theme');
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+
+/* ===================== FONT SIZE ===================== */
+function applyFont(scale){
+  document.documentElement.style.setProperty('--font-scale', scale);
+  localStorage.setItem('dl_font', scale);
+}
+(function(){
+  var saved = parseFloat(localStorage.getItem('dl_font')) || 1;
+  applyFont(saved);
+})();
+function changeFont(dir){
+  var cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
+  if(dir===0){ applyFont(1); return; }
+  var next = Math.min(1.4, Math.max(0.8, cur + dir*0.1));
+  applyFont(next);
+}
+
+/* ===================== PROGRESS TRACKER ===================== */
+var PROGRESS_KEY = 'dl_progress';
+function getProgress(){
+  try{ return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; }catch(e){ return {}; }
+}
+function setProgress(id, status){
+  var p = getProgress();
+  p[id] = status;
+  localStorage.setItem(PROGRESS_KEY, JSON.stringify(p));
+  renderProgressButton(id);
+  updateProgressSummary();
+}
+function cycleProgress(id){
+  var p = getProgress();
+  var cur = p[id] || 0;
+  var next = (cur + 1) % 3;
+  setProgress(id, next);
+}
+var progressLabels = ['☐ Not Started', '◐ Studying', '✓ Completed'];
+function renderProgressButton(id){
+  var btn = document.querySelector('.progress-btn[data-id="'+id+'"]');
+  if(!btn) return;
+  var p = getProgress();
+  var status = p[id] || 0;
+  btn.textContent = progressLabels[status];
+  btn.className = 'progress-btn status-' + status;
+}
+function updateProgressSummary(){
+  var p = getProgress();
+  var vals = Object.values(p);
+  var done = vals.filter(function(v){return v===2;}).length;
+  var studying = vals.filter(function(v){return v===1;}).length;
+  var total = document.querySelectorAll('.progress-btn').length;
+  document.getElementById('progressSummary').textContent =
+    '✓ ' + done + '/' + total + ' completed · ◐ ' + studying + ' studying';
+}
+
+/* ===================== BOOKMARKS ===================== */
+var BOOKMARK_KEY = 'dl_bookmarks';
+function getBookmarks(){
+  try{ return JSON.parse(localStorage.getItem(BOOKMARK_KEY)) || {}; }catch(e){ return {}; }
+}
+function toggleBookmark(id){
+  var b = getBookmarks();
+  b[id] = !b[id];
+  localStorage.setItem(BOOKMARK_KEY, JSON.stringify(b));
+  renderBookmarkButton(id);
+}
+function renderBookmarkButton(id){
+  var btn = document.querySelector('.bookmark-btn[data-id="'+id+'"]');
+  if(!btn) return;
+  var b = getBookmarks();
+  btn.textContent = b[id] ? '⭐' : '☆';
+  btn.classList.toggle('active', !!b[id]);
+}
+function showBookmarksOnly(){
+  var b = getBookmarks();
+  document.querySelectorAll('.topic').forEach(function(t){
+    t.style.display = b[t.id] ? '' : 'none';
+  });
+  document.querySelectorAll('.chapter-header, .unit-banner, .revision-box').forEach(function(el){
+    el.style.display = 'none';
+  });
+}
+function clearFilter(){
+  document.querySelectorAll('.topic, .chapter-header, .unit-banner, .revision-box').forEach(function(el){
+    el.style.display = '';
+  });
+}
+
+/* Init all progress/bookmark buttons on load */
+function initTopicControls(){
+  document.querySelectorAll('.progress-btn').forEach(function(btn){
+    renderProgressButton(btn.getAttribute('data-id'));
+  });
+  document.querySelectorAll('.bookmark-btn').forEach(function(btn){
+    renderBookmarkButton(btn.getAttribute('data-id'));
+  });
+  updateProgressSummary();
+}
+
+/* ===================== SEARCH ===================== */
+var searchIndex = [];
+function buildSearchIndex(){
+  searchIndex = [];
+  document.querySelectorAll('.topic').forEach(function(t){
+    var titleEl = t.querySelector('h3');
+    var title = titleEl ? titleEl.textContent : t.id;
+    searchIndex.push({id: t.id, title: title, text: t.textContent.toLowerCase()});
+  });
+}
+document.getElementById('searchBox').addEventListener('input', function(e){
+  var q = e.target.value.toLowerCase().trim();
+  var results = document.getElementById('searchResults');
+  results.innerHTML = '';
+  if(q.length < 2) return;
+  var matches = searchIndex.filter(function(item){ return item.text.indexOf(q) !== -1; }).slice(0, 25);
+  matches.forEach(function(m){
+    var div = document.createElement('div');
+    div.textContent = m.title;
+    div.onclick = function(){
+      clearFilter();
+      document.getElementById(m.id).scrollIntoView({behavior:'smooth', block:'start'});
+      document.getElementById('searchResults').innerHTML = '';
+      document.getElementById('searchBox').value = '';
+      if(window.innerWidth <= 900){ document.getElementById('sidebar').classList.remove('open'); }
+    };
+    results.appendChild(div);
+  });
+});
+
+/* ===================== BACK TO TOP ===================== */
+window.addEventListener('scroll', function(){
+  document.getElementById('backToTop').style.display = window.scrollY > 400 ? 'block' : 'none';
+});
+
+/* ===================== SIDEBAR ACTIVE LINK ===================== */
+function setupSidebarLinks(){
+  document.querySelectorAll('#navTree a').forEach(function(a){
+    a.addEventListener('click', function(){
+      if(window.innerWidth <= 900){ document.getElementById('sidebar').classList.remove('open'); }
+    });
+  });
+}
+
+window.addEventListener('DOMContentLoaded', function(){
+  buildSearchIndex();
+  initTopicControls();
+  setupSidebarLinks();
+});
+</script>
+</body>
+</html>

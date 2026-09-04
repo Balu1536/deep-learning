@@ -1,0 +1,315 @@
+<div class="chapter-header" id="ch4"><h2>Chapter 4: Regularization for Deep Learning</h2></div>
+  <div class="topic" id="t-param-norm">
+    <div class="topic-head">
+      <h3>1. Parameter Norm Penalties</h3>
+      <div class="topic-controls">
+        <span class="badge vh">🔥 VERY HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-param-norm" onclick="cycleProgress('t-param-norm')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-param-norm" onclick="toggleBookmark('t-param-norm')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Very important — directly connected to L1/L2 regularization, overfitting, and optimization. Common 5- and 10-mark topic.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Parameter norm penalties</b> add a penalty term based on the magnitude of model parameters to the training objective. This discourages excessively large weights and helps reduce overfitting.</div>
+<div class="subhead">🧠 Intuition</div><p>A model with very large weights can become overly sensitive to training data. Penalizing large weights encourages a simpler model that generalizes better.</p>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">L<sub>total</sub> = L<sub>data</sub> + αΩ(θ)<br><br>L1: Ω(θ) = ‖θ‖<sub>1</sub> = Σ|θ<sub>i</sub>|<br>L2: Ω(θ) = ‖θ‖<sub>2</sub><sup>2</sup> = Σθ<sub>i</sub><sup>2</sup></div>
+<div class="subhead">📖 Detailed Explanation</div><p>L1 regularization tends to produce sparse parameters because the absolute-value penalty encourages some weights to become exactly zero. L2 regularization smoothly discourages large weights and is commonly called weight decay.</p>
+<div class="subhead">💡 Example</div><p>If the original loss is 10 and the L2 penalty contributes 0.8, the regularized objective becomes 10.8.</p>
+<div class="subhead">🔄 Comparison with Related Concepts</div><p>L1 → sparsity and feature selection. L2 → smaller, distributed weights and smoother solutions.</p>
+<div class="subhead">⚠️ Common Mistakes</div><p>Confusing ‖θ‖₂ with ‖θ‖₂² and forgetting that the regularization coefficient controls penalty strength.</p>
+<div class="subhead">🧠 Important Points to Remember</div><ul><li>Regularization reduces overfitting.</li><li>L1 encourages sparsity.</li><li>L2 penalizes large weights.</li></ul>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define L1 and L2 regularization.</li><li>(5M) Explain parameter norm penalties.</li><li>(10M) Compare L1 and L2 regularization mathematically.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-constrained-reg">
+    <div class="topic-head">
+      <h3>2. Norm Penalties as Constrained Optimization</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-constrained-reg" onclick="cycleProgress('t-constrained-reg')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-constrained-reg" onclick="toggleBookmark('t-constrained-reg')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Important mathematical connection between regularization and constrained optimization.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">A regularized optimization problem can often be expressed as an equivalent constrained optimization problem in which the parameter norm is restricted to a fixed budget.</div>
+<div class="subhead">🔢 Mathematical Formulation</div>
+<div class="box formula">Penalty form: minimize L(θ) + αΩ(θ)<br><br>Constrained form: minimize L(θ) subject to Ω(θ) ≤ c</div>
+<div class="subhead">🧠 Intuition</div><p>Instead of saying "large weights are expensive", we can say "the model is allowed only a limited weight budget."</p>
+<div class="subhead">📖 Detailed Explanation</div><p>The parameter α controls the strength of the penalty, while c controls the size of the feasible region. Under appropriate conditions these formulations are closely related through Lagrange multipliers.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(5M) Explain regularization as constrained optimization.</li><li>(10M) Derive the relationship between penalty and constrained forms.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-underconstrained">
+    <div class="topic-head">
+      <h3>3. Regularization and Under-Constrained Problems</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-underconstrained" onclick="cycleProgress('t-underconstrained')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-underconstrained" onclick="toggleBookmark('t-underconstrained')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Important for understanding why regularization is necessary when many parameter settings can fit the training data.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">An under-constrained problem has insufficient information or restrictions to determine a unique desirable solution. Regularization adds useful constraints or preferences to select a better solution.</div>
+<div class="subhead">🧠 Intuition</div><p>If many models produce almost identical training performance, regularization prefers simpler parameter configurations.</p>
+<div class="subhead">📖 Detailed Explanation</div><p>Deep networks can have huge numbers of parameters and may have many solutions with low training error. Regularization introduces an inductive preference toward solutions that are less likely to overfit.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(5M) Why is regularization useful in under-constrained problems?</li><li>(10M) Discuss regularization as an inductive bias.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-augmentation">
+    <div class="topic-head">
+      <h3>4. Dataset Augmentation</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-augmentation" onclick="cycleProgress('t-augmentation')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-augmentation" onclick="toggleBookmark('t-augmentation')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Common practical regularization technique, especially in image and speech applications.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def">Dataset augmentation creates additional training examples by applying label-preserving transformations to existing examples.</div>
+<div class="subhead">🧠 Intuition</div><p>Instead of collecting entirely new data, create realistic variations of existing data so the model learns more robust patterns.</p>
+<div class="subhead">💡 Example</div><p>For an image classifier, small rotations, crops, translations, or horizontal flips may create additional valid training examples when the label remains unchanged.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define data augmentation.</li><li>(5M) Explain how data augmentation reduces overfitting.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-noise">
+    <div class="topic-head">
+      <h3>5. Noise Robustness</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-noise" onclick="cycleProgress('t-noise')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-noise" onclick="toggleBookmark('t-noise')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def">Noise robustness is the ability of a model to maintain useful performance when training or input data contains perturbations or noise.</div>
+<div class="subhead">🧠 Intuition</div><p>Training with appropriate noise can prevent the network from depending too strongly on individual training examples or features.</p>
+<div class="subhead">💡 Example</div><p>Adding small noise to inputs during training can encourage the model to learn stable representations.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) What is noise robustness?</li><li>(5M) Explain noise-based regularization.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-semi-supervised">
+    <div class="topic-head">
+      <h3>6. Semi-Supervised Learning</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-semi-supervised" onclick="cycleProgress('t-semi-supervised')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-semi-supervised" onclick="toggleBookmark('t-semi-supervised')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def">Semi-supervised learning uses a small amount of labeled data together with a larger amount of unlabeled data.</div>
+<div class="subhead">🧠 Intuition</div><p>Unlabeled examples can provide information about the structure of the data distribution, helping improve generalization.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define semi-supervised learning.</li><li>(5M) Explain its role in deep learning.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-multitask">
+    <div class="topic-head">
+      <h3>7. Multi-Task Learning</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-multitask" onclick="cycleProgress('t-multitask')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-multitask" onclick="toggleBookmark('t-multitask')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Multi-task learning</b> trains one model to perform multiple related tasks simultaneously, allowing tasks to share useful representations.</div>
+<div class="subhead">🧠 Intuition</div><p>Learning several related tasks together can act as a regularizer because the shared representation must work across multiple objectives.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define multi-task learning.</li><li>(5M) Explain how multi-task learning regularizes a model.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-early-stop">
+    <div class="topic-head">
+      <h3>8. Early Stopping</h3>
+      <div class="topic-controls">
+        <span class="badge vh">🔥 VERY HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-early-stop" onclick="cycleProgress('t-early-stop')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-early-stop" onclick="toggleBookmark('t-early-stop')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Very important and frequently asked practical regularization method.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Early stopping</b> stops training when performance on a validation set stops improving, rather than continuing until training error is minimized.</div>
+<div class="subhead">🧠 Intuition</div><p>Training too long may make the model memorize training data. Stop near the point where validation performance is best.</p>
+<div class="subhead">🔢 Procedure</div><p>Train → monitor validation loss → save best model → stop after validation performance fails to improve for a chosen patience period.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define early stopping.</li><li>(5M) Explain early stopping with a validation-loss diagram.</li><li>(10M) Discuss early stopping as regularization.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-parameter-sharing">
+    <div class="topic-head">
+      <h3>9. Parameter Tying and Parameter Sharing</h3>
+      <div class="topic-controls">
+        <span class="badge h">🟠 HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-parameter-sharing" onclick="cycleProgress('t-parameter-sharing')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-parameter-sharing" onclick="toggleBookmark('t-parameter-sharing')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def">Parameter sharing forces different parts of a model to use the same parameter values, reducing the number of independent parameters.</div>
+<div class="subhead">🧠 Intuition</div><p>If the same pattern detector is useful in multiple locations, one shared set of parameters can be reused rather than learning separate copies.</p>
+<div class="subhead">💡 Example</div><p>Convolutional neural networks use shared convolution filters across spatial locations.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define parameter sharing.</li><li>(5M) Explain parameter tying with an ML example.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-sparse">
+    <div class="topic-head">
+      <h3>10. Sparse Representations</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-sparse" onclick="cycleProgress('t-sparse')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-sparse" onclick="toggleBookmark('t-sparse')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def">A sparse representation describes an input using relatively few active features or non-zero components.</div>
+<div class="subhead">🧠 Intuition</div><p>Instead of representing information using every available feature, only a small subset becomes strongly active.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define sparse representation.</li><li>(5M) Explain sparsity as a regularization idea.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-bagging">
+    <div class="topic-head">
+      <h3>11. Bagging and Other Ensemble Methods</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-bagging" onclick="cycleProgress('t-bagging')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-bagging" onclick="toggleBookmark('t-bagging')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Bagging</b> trains multiple models on different bootstrap samples and combines their predictions, often reducing variance.</div>
+<div class="subhead">🧠 Intuition</div><p>Several imperfect models can collectively make a more stable prediction than one model.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define bagging.</li><li>(5M) Explain how ensemble methods reduce variance.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-dropout">
+    <div class="topic-head">
+      <h3>12. Dropout</h3>
+      <div class="topic-controls">
+        <span class="badge vh">🔥 VERY HIGH PRIORITY</span>
+        <button class="progress-btn" data-id="t-dropout" onclick="cycleProgress('t-dropout')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-dropout" onclick="toggleBookmark('t-dropout')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">⭐ Importance</div><p>Very High — one of the most important deep-learning regularization topics and a common exam question.</p>
+<div class="subhead">📌 Definition</div>
+<div class="box def"><b>Dropout</b> randomly sets a subset of activations to zero during training, preventing units from relying too strongly on specific other units.</div>
+<div class="subhead">🧠 Intuition</div><p>Each training step uses a slightly different sub-network. This reduces co-adaptation and behaves like training an ensemble of many related networks.</p>
+<div class="subhead">🔢 Mathematical Formulation</div><p>With keep probability p, a unit is retained with probability p. In inverted dropout, retained activations are scaled by 1/p during training.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define dropout.</li><li>(5M) Explain the working of dropout.</li><li>(10M) Discuss dropout as a regularization technique.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-adversarial">
+    <div class="topic-head">
+      <h3>13. Adversarial Training</h3>
+      <div class="topic-controls">
+        <span class="badge m">🟡 MEDIUM PRIORITY</span>
+        <button class="progress-btn" data-id="t-adversarial" onclick="cycleProgress('t-adversarial')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-adversarial" onclick="toggleBookmark('t-adversarial')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def">Adversarial training exposes a model to deliberately constructed small input perturbations during training so that it becomes more robust to such perturbations.</div>
+<div class="subhead">🧠 Intuition</div><p>The model learns not only from normal examples but also from challenging nearby examples.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define adversarial training.</li><li>(5M) Explain how adversarial training improves robustness.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-tangent-distance">
+    <div class="topic-head">
+      <h3>14. Tangent Distance</h3>
+      <div class="topic-controls">
+        <span class="badge l">🟢 LOW PRIORITY</span>
+        <button class="progress-btn" data-id="t-tangent-distance" onclick="cycleProgress('t-tangent-distance')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-tangent-distance" onclick="toggleBookmark('t-tangent-distance')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def">Tangent distance measures similarity by considering small transformations of examples along directions that preserve their essential identity.</div>
+<div class="subhead">💡 Example</div><p>For handwritten digits, small translations or rotations may change the pixels but not the identity of the digit.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) What is tangent distance?</li><li>(5M) Explain its motivation.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-tangent-prop">
+    <div class="topic-head">
+      <h3>15. Tangent Prop</h3>
+      <div class="topic-controls">
+        <span class="badge l">🟢 LOW PRIORITY</span>
+        <button class="progress-btn" data-id="t-tangent-prop" onclick="cycleProgress('t-tangent-prop')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-tangent-prop" onclick="toggleBookmark('t-tangent-prop')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def">Tangent Prop encourages a neural network to produce stable outputs under specified small transformations of its inputs.</div>
+<div class="subhead">🧠 Intuition</div><p>If a small transformation should not change the label, the network should ideally change its output very little.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) Define Tangent Prop.</li><li>(5M) Explain transformation invariance using Tangent Prop.</li></ul>
+
+  </div>
+
+  <div class="topic" id="t-manifold">
+    <div class="topic-head">
+      <h3>16. Manifold Tangent Classifiers</h3>
+      <div class="topic-controls">
+        <span class="badge l">🟢 LOW PRIORITY</span>
+        <button class="progress-btn" data-id="t-manifold" onclick="cycleProgress('t-manifold')">☐ Not Started</button>
+        <button class="bookmark-btn" data-id="t-manifold" onclick="toggleBookmark('t-manifold')">☆</button>
+      </div>
+    </div>
+    
+<div class="subhead">📌 Definition</div>
+<div class="box def">Manifold Tangent Classifiers use tangent directions of the data manifold to encourage representations that are invariant to small transformations along that manifold.</div>
+<div class="subhead">🧠 Intuition</div><p>Real-world data often lies near a lower-dimensional manifold. Small movements along that manifold can preserve semantic identity.</p>
+<div class="subhead">🎯 Exam-Oriented Questions</div><ul><li>(2M) What is a manifold tangent classifier?</li><li>(5M) Explain the connection between manifolds and invariance.</li></ul>
+
+  </div>
+
+<div class="revision-box">
+<h3>📚 Unit 3 — Chapter 4 Quick Revision</h3>
+<ul class="priority-list">
+<li>🔥 Parameter Norm Penalties — L1 vs L2</li>
+<li>🔥 Early Stopping</li>
+<li>🔥 Dropout</li>
+<li>🟠 Norm Penalties as Constrained Optimization</li>
+<li>🟠 Dataset Augmentation</li>
+<li>🟠 Parameter Tying and Parameter Sharing</li>
+<li>🟡 Noise Robustness</li>
+<li>🟡 Semi-Supervised Learning</li>
+<li>🟡 Multi-Task Learning</li>
+<li>🟡 Sparse Representations</li>
+<li>🟡 Bagging and Ensemble Methods</li>
+<li>🟡 Adversarial Training</li>
+<li>🟢 Tangent Distance</li>
+<li>🟢 Tangent Prop</li>
+<li>🟢 Manifold Tangent Classifiers</li>
+</ul>
+</div>
